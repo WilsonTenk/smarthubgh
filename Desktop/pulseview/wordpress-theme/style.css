@@ -1,0 +1,244 @@
+/*
+Theme Name: PulseView
+Theme URI: https://pulseview.media
+Author: PulseView Media Group
+Author URI: https://pulseview.media
+Description: A high-fidelity journalism theme based on the PulseView React application.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: pulseview
+Tags: news, magazine, responsive, custom-colors, two-columns, full-width-template
+*/
+
+/* ==========================================================================
+   Custom Styles from original app
+   ========================================================================== */
+
+:root {
+    --sat: env(safe-area-inset-top);
+    --sar: env(safe-area-inset-right);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+}
+
+.safe-bottom {
+    padding-bottom: calc(12px + var(--sab));
+}
+
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 4px;
+}
+
+/* Animations */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+/* Utilities */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+img {
+    transition: opacity 0.3s ease-in-out;
+    max-width: 100%;
+    height: auto;
+}
+
+img[loading="lazy"] {
+    opacity: 0;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+input,
+textarea {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}
+
+/* WordPress Core Alignments */
+.aligncenter {
+    display: block;
+    margin: 0 auto;
+}
+
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+}
+
+.wp-caption {
+    max-width: 100%;
+}
+
+.wp-caption-text {
+    font-size: 0.8em;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Standard WordPress formatting fallback
+   (Ensures basic styling for Classic Editor content if Tailwind Typography is not applied or loading)
+   ========================================================================== */
+
+/* Links */
+a {
+    color: #dc2626; /* PulseView Red */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: #b91c1c;
+    text-decoration: underline;
+}
+
+/* Typography Basics */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75em;
+    color: #1a1a1a;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.5em; }
+h5 { font-size: 1.25em; }
+h6 { font-size: 1em; }
+
+p {
+    margin-bottom: 1.5em;
+    line-height: 1.75;
+}
+
+/* Lists */
+ul, ol {
+    margin: 0 0 1.5em 1.5em;
+    padding: 0;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+li > ul,
+li > ol {
+    margin-bottom: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #dc2626;
+    margin: 1.5em 0;
+    padding: 0.5em 0 0.5em 1.5em;
+    color: #4b5563;
+    font-style: italic;
+}
+
+/* Images and Embeds inside content */
+.entry-content img, 
+.prose img {
+    height: auto;
+    max-width: 100%;
+    margin-bottom: 1.5em;
+    border-radius: 0.5rem; /* rounded-lg */
+}
+
+/* Make sure alignments work with images */
+.alignleft {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+}
+
+/* Clear floats */
+.entry-content::after,
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Separator/HR */
+hr {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 3em 0;
+}
