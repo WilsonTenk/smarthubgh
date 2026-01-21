@@ -362,24 +362,4 @@ function pulseview_create_dummy_content()
 }
 add_action('after_switch_theme', 'pulseview_create_dummy_content');
 
-/**
- * Remove /category/ from URLs
- * Note: After adding this, you MUST go to Settings > Permalinks and click "Save Changes" to flush the rules.
- */
-function pulseview_remove_category_base($string, $type)
-{
-	if ($type == 'single' && strpos($string, 'category') !== false) {
-		$url_parts = explode('/', $string);
-	}
-	return str_replace('/category/', '/', $string);
-}
-add_filter('category_link', 'pulseview_remove_category_base', 10, 2);
 
-function pulseview_remove_category_base_rewrite()
-{
-	global $wp_rewrite;
-	// Define the category base as existing but pointing to root structure
-	$wp_rewrite->category_base = '';
-	$wp_rewrite->category_structure = '/%category%';
-}
-add_action('init', 'pulseview_remove_category_base_rewrite');
