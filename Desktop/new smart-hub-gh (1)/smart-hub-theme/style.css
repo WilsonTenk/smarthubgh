@@ -1,0 +1,62 @@
+/*
+Theme Name: Smart Hub GH Theme
+Theme URI: https://smarthubgh.com
+Author: Smart Hub GH
+Description: A custom WordPress theme converted from React for Smart Hub GH.
+Version: 1.0
+*/
+
+/* 
+   We will rely on the Tailwind CDN for pixel-perfect replication 
+   as per the original React app's index.html. 
+   
+   However, we also include some base resets and WordPress specific styles here.
+*/
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+    background-color: #FFFFFF;
+    color: #1E293B;
+    line-height: 1.6;
+}
+
+.dark body {
+    background-color: #0B1121;
+    color: #F8FAFC;
+}
+
+h1, h2, h3, .font-display {
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+}
+
+p {
+    letter-spacing: 0.01em;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+.dark ::-webkit-scrollbar-track {
+    background: #0F172A;
+}
+::-webkit-scrollbar-thumb {
+    background: #0055FF;
+    border-radius: 10px;
+}
+
+/* Wordpress Admin Bar Fix */
+.admin-bar nav {
+    top: 32px !important;
+}
+@media screen and (max-width: 782px) {
+    .admin-bar nav {
+        top: 46px !important;
+    }
+}
