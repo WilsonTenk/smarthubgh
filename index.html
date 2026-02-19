@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMART HUB GH - Empowering Ghanaian Youth</title>
+    <meta name="description" content="SMART HUB GH is a youth-led organization in Ghana empowering the next generation through digital innovation, health advocacy (SRHR), and community leadership." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://smarthubgh.com/" />
+    <meta property="og:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
+    <meta property="og:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
+    <meta property="og:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://smarthubgh.com/" />
+    <meta property="twitter:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
+    <meta property="twitter:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
+    <meta property="twitter:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
+    
+    <link rel="icon" type="image/png" href="/SMART-HUB-LOGO-ORIGINAL.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      // Initialize theme before content loads to prevent flicker
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              display: ['Plus Jakarta Sans', 'sans-serif'], 
+            },
+            colors: {
+              brand: {
+                blue: '#0055FF',      /* Vibrant Blue */
+                navy: '#0B1121',      /* Deep Background Blue */
+                green: '#00D26A',     /* Subtle Green Accent */
+                light: '#F8FAFC',     /* Light Slate */
+                dark: '#020617'       
+              }
+            },
+            animation: {
+              'float-slow': 'float 8s ease-in-out infinite',
+              'marquee': 'marquee 40s linear infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-15px)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        overflow-x: hidden;
+        background-color: #FFFFFF;
+        color: #1E293B;
+        line-height: 1.6;
+      }
+      .dark body {
+        background-color: #0B1121;
+        color: #F8FAFC;
+      }
+      h1, h2, h3, .font-display {
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+      }
+      p {
+        letter-spacing: 0.01em;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #F1F5F9;
+      }
+      .dark ::-webkit-scrollbar-track {
+        background: #0F172A;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #0055FF;
+        border-radius: 10px;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.23.26"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-CMREEi27.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+</body>
+</html>
