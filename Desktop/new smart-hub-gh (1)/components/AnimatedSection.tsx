@@ -10,19 +10,19 @@ interface AnimatedSectionProps {
   style?: React.CSSProperties;
 }
 
-export const AnimatedSection: React.FC<AnimatedSectionProps> = ({ 
-  children, 
-  className = "", 
+export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
+  children,
+  className = "",
   delay = 0,
   direction = 'right',
   width,
   style
 }) => {
-  
+
   const getInitialPosition = () => {
-    switch(direction) {
+    switch (direction) {
       // "right" means it comes FROM the right (swipes left)
-      case 'right': return { x: 100, opacity: 0 }; 
+      case 'right': return { x: 100, opacity: 0 };
       case 'left': return { x: -100, opacity: 0 };
       case 'up': return { y: 60, opacity: 0 };
       case 'down': return { y: -60, opacity: 0 };
@@ -31,7 +31,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   };
 
   const getAnimatePosition = () => {
-    switch(direction) {
+    switch (direction) {
       case 'right': return { x: 0, opacity: 1 };
       case 'left': return { x: 0, opacity: 1 };
       case 'up': return { y: 0, opacity: 1 };
@@ -44,10 +44,14 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
     <motion.div
       initial={getInitialPosition()}
       whileInView={getAnimatePosition()}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay }} // Custom ease for smooth swipe
-      className={className}
-      style={{ ...(width ? { width } : {}), ...style }}
+      viewport={{ once: true, margin: "-5% 0px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }} // Faster, snappier feel
+      className={`${className} transform-gpu`}
+      style={{
+        ...(width ? { width } : {}),
+        ...style,
+        willChange: "transform, opacity" // Performance hint
+      }}
     >
       {children}
     </motion.div>

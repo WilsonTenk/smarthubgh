@@ -10,20 +10,17 @@ const testimonials = [
   {
     quote: "SMART HUB has fundamentally changed how our youth perceive digital opportunity. They are no longer just consumers, but creators.",
     author: "Kwadwo Mensah",
-    role: "Community Leader, Ho",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop"
+    role: "Community Leader, Ho"
   },
   {
     quote: "The Safe Flow project restored dignity to our school-going girls. The impact on attendance has been immediate and profound.",
     author: "Ama Serwaa",
-    role: "Headteacher, Adaklu",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop"
+    role: "Headteacher, Adaklu"
   },
   {
     quote: "Bridging the gap between raw potential and impactful advocacy. A true partner in development for the Volta Region.",
     author: "Samuel Boateng",
-    role: "Project Director, Brave Movement",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
+    role: "Project Director, Brave Movement"
   }
 ];
 
@@ -73,16 +70,16 @@ const Home: React.FC = () => {
   }, []);
 
   const lineVariants = {
-    initial: { x: 60, opacity: 0 },
+    initial: { x: 40, opacity: 0 },
     animate: {
       x: 0,
       opacity: 1,
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.8, ease: "easeOut" } // Simplified physics
     },
     exit: {
-      x: -30,
+      x: -20,
       opacity: 0,
-      transition: { duration: 0.6, ease: "easeInOut" }
+      transition: { duration: 0.4 }
     }
   };
 
@@ -108,7 +105,7 @@ const Home: React.FC = () => {
       <section className="relative min-h-[90vh] flex items-center pt-32 md:pt-40 pb-16 overflow-hidden bg-white dark:bg-slate-900 transition-colors duration-300">
         <motion.div
           style={{ y: y1 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square bg-brand-blue/[0.04] dark:bg-brand-blue/[0.08] rounded-full blur-[160px] pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square bg-brand-blue/[0.04] dark:bg-brand-blue/[0.08] rounded-full blur-3xl transform-gpu pointer-events-none will-change-transform"
         ></motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -180,6 +177,8 @@ const Home: React.FC = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 1 }}
                         className="w-full h-full object-cover absolute inset-0"
+                        loading="eager" // Optimize LCP
+                        fetchPriority="high"
                       />
                     </AnimatePresence>
                   </div>
@@ -192,7 +191,7 @@ const Home: React.FC = () => {
                       <CheckCircle size={24} />
                     </div>
                     <div>
-                      <p className="text-lg md:text-xl font-black text-brand-navy dark:text-white leading-none">9 Years</p>
+                      <p className="text-lg md:text-xl font-black text-brand-navy dark:text-white leading-none">5 Years</p>
                       <p className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate-400 mt-1">Impact Record</p>
                     </div>
                   </motion.div>
@@ -204,7 +203,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Marquee */}
-      <div className="bg-white dark:bg-brand-navy border-y border-slate-100 dark:border-white/5 py-8 md:py-10 overflow-hidden whitespace-nowrap relative z-10 transition-colors">
+      <div className="bg-white dark:bg-brand-navy border-y border-slate-100 dark:border-white/5 py-8 md:py-10 overflow-hidden whitespace-nowrap relative z-10 transition-colors transform-gpu">
         <div className="inline-block animate-marquee">
           {[...Array(6)].map((_, i) => (
             <span key={i} className="text-slate-300 dark:text-slate-700 font-black text-sm md:text-base mx-8 md:mx-12 uppercase tracking-[0.4em] inline-flex items-center">
@@ -334,9 +333,6 @@ const Home: React.FC = () => {
                       "{testimonial.quote}"
                     </p>
                     <div className="flex items-center gap-4 pt-6 border-t border-slate-200/50 dark:border-white/5">
-                      <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-md">
-                        <img src={testimonial.image} alt={testimonial.author} className="w-full h-full object-cover" />
-                      </div>
                       <div>
                         <h4 className="font-black text-brand-navy dark:text-white uppercase text-xs tracking-widest">{testimonial.author}</h4>
                         <p className="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-widest mt-0.5">{testimonial.role}</p>

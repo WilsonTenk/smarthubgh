@@ -89,7 +89,12 @@ export const projectsData: Project[] = [
     communities: "Ve-Wudome, Ve-Golokwati",
     reach: "325 beneficiaries",
     description: "Enhanced adolescent knowledge on teenage pregnancy prevention and sexual abuse through mentorship.",
-    image: "/images/IMG_0196.jpg"
+    image: "/images/smart1.jpg",
+    galleryImages: [
+      "/images/smart2.jpg",
+      "/images/smart3.jpg",
+      "/images/smart4.jpg"
+    ]
   },
   {
     id: "covid-19",
