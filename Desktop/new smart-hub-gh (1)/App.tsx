@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -24,7 +24,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename="/smarthubgh">
       <ScrollToTop />
       <div className="flex flex-col min-h-screen font-sans text-gray-900 dark:text-white bg-white dark:bg-brand-navy transition-colors duration-300">
         <Navbar />
@@ -46,7 +46,7 @@ const App: React.FC = () => {
         {/* Sticky footer that is "revealed" as content ends */}
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

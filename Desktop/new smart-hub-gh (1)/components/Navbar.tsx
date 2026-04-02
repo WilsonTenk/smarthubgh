@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Heart, Sun, Moon } from 'lucide-react';
+import { getAssetPath } from '../utils/assetPath';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
 
           <Link to="/" className="flex items-center gap-3 group relative z-[110]">
-            <img src="/SMART-HUB-LOGO-ORIGINAL.png" alt="Smart Hub Logo" className="h-16 w-auto object-contain" />
+            <img src={getAssetPath("/SMART-HUB-LOGO-ORIGINAL.png")} alt="Smart Hub Logo" className="h-16 w-auto object-contain" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">

@@ -8,6 +8,7 @@ interface AnimatedSectionProps {
   direction?: 'left' | 'right' | 'up' | 'down';
   width?: string;
   style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
@@ -16,7 +17,8 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   delay = 0,
   direction = 'right',
   width,
-  style
+  style,
+  onClick
 }) => {
 
   const getInitialPosition = () => {
@@ -42,6 +44,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
 
   return (
     <motion.div
+      onClick={onClick}
       initial={getInitialPosition()}
       whileInView={getAnimatePosition()}
       viewport={{ once: true, margin: "-5% 0px" }}

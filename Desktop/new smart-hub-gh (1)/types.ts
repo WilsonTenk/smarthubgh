@@ -25,6 +25,8 @@ export interface LeadershipMember {
   name: string;
   role: string;
   image: string;
+  occupation?: string;
+  bio?: string;
 }
 
 export interface BlogPost {

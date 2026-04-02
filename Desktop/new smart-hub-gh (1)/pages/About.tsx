@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'framer-motion';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { leadershipData, partnersData } from '../data';
-import { Users, Globe, Layers, CheckCircle2 } from 'lucide-react';
+import { Users, Globe, Layers, CheckCircle2, X } from 'lucide-react';
+import { LeadershipMember } from '../types';
 
 const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix = "" }) => {
   const count = useMotionValue(0);
@@ -23,6 +24,16 @@ const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix =
 };
 
 const About: React.FC = () => {
+  const [selectedLeader, setSelectedLeader] = useState<LeadershipMember | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedLeader(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="bg-white dark:bg-brand-navy min-h-screen transition-colors duration-300">
 
@@ -162,7 +173,7 @@ const About: React.FC = () => {
       </section>
 
       {/* Leadership */}
-      <section className="py-16 md:py-20 bg-white dark:bg-brand-navy transition-colors">
+      <section className="py-16 md:py-20 bg-white dark:bg-brand-navy transition-colors relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up" className="text-center mb-12">
             <h2 className="text-3xl md:text-5xl font-black text-brand-navy dark:text-white uppercase tracking-tighter">Our Leadership</h2>
@@ -173,16 +184,55 @@ const About: React.FC = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {leadershipData.map((leader, idx) => (
-              <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="group text-center">
-                <div className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
+              <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="group text-center cursor-pointer" onClick={() => setSelectedLeader(leader)}>
+                <motion.div layoutId={`leader-image-${leader.name}`} className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
                   <img src={leader.image} alt={leader.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" />
-                </div>
+                </motion.div>
                 <h4 className="text-base md:text-lg font-black text-brand-navy dark:text-white uppercase tracking-tight">{leader.name}</h4>
                 <p className="text-brand-blue font-black uppercase text-[9px] md:text-[10px] tracking-[0.2em] mt-1">{leader.role}</p>
+                {leader.occupation && <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">{leader.occupation}</p>}
               </AnimatedSection>
             ))}
           </div>
         </div>
+
+        <AnimatePresence>
+          {selectedLeader && (
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-brand-navy/80 backdrop-blur-sm"
+              onClick={() => setSelectedLeader(null)}
+            >
+              <motion.div 
+                layoutId={`leader-image-${selectedLeader.name}`} 
+                className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row max-h-[90vh]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button 
+                  onClick={() => setSelectedLeader(null)}
+                  className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+                <div className="w-full md:w-2/5 aspect-square md:aspect-auto md:h-auto shrink-0 relative">
+                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-6 md:p-8 flex-1 overflow-y-auto">
+                  <h3 className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tight mb-2">{selectedLeader.name}</h3>
+                  <div className="mb-6 flex flex-col gap-1">
+                    <span className="text-brand-blue font-black uppercase text-xs tracking-[0.2em]">{selectedLeader.role}</span>
+                    {selectedLeader.occupation && <span className="text-slate-500 dark:text-slate-400 font-medium text-sm">{selectedLeader.occupation}</span>}
+                  </div>
+                  <div className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm md:text-base whitespace-pre-line space-y-4">
+                    {selectedLeader.bio}
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
     </div>
   );

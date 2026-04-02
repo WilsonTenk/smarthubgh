@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, CheckCircle, ArrowUpRight, Heart, Lightbulb, Minus, Plus, Quote } from 'lucide-react';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { projectsData } from '../data';
+import { getAssetPath } from '../utils/assetPath';
 
 const testimonials = [
   {
@@ -30,9 +31,9 @@ const Home: React.FC = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    '/images/slide-1.png',
-    '/images/slide-2.png',
-    '/images/slide-3.png'
+    getAssetPath('/images/slide-1.png'),
+    getAssetPath('/images/slide-2.png'),
+    getAssetPath('/images/slide-3.png')
   ];
 
   useEffect(() => {

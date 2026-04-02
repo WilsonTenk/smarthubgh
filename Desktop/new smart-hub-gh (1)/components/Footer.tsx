@@ -2,6 +2,7 @@
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { getAssetPath } from '../utils/assetPath';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -22,7 +23,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-4 mb-8">
-                <img src="/SMART-HUB-LOGO-ORIGINAL.png" alt="Smart Hub Logo" className="h-20 w-auto object-contain" />
+                <img src={getAssetPath("/SMART-HUB-LOGO-ORIGINAL.png")} alt="Smart Hub Logo" className="h-20 w-auto object-contain" />
                 <h2 className="text-4xl md:text-6xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
                   Impact <br />
                   <span className="text-brand-blue">Starts Now.</span>

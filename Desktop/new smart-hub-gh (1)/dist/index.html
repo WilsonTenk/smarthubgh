@@ -6,13 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SMART HUB GH - Empowering Ghanaian Youth</title>
     <meta name="description" content="SMART HUB GH is a youth-led organization in Ghana empowering the next generation through digital innovation, health advocacy (SRHR), and community leadership." />
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://esm.sh; frame-ancestors 'none';" />
+
+    <!-- SPA Redirect: restore path from GitHub Pages 404 redirect -->
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+        // Handle ?p= redirect from 404.html
+        var search = window.location.search;
+        if (search) {
+          var matched = search.slice(1).split('&').reduce(function(o, item) {
+            var parts = item.split('='); o[parts[0]] = parts.slice(1).join('=').replace(/~and~/g,'&'); return o;
+          }, {});
+          if (matched.p) {
+            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p;
+            if (matched.q) newUrl += '?' + matched.q;
+            window.history.replaceState(null, null, newUrl);
+          }
+        }
+      })();
+    </script>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://smarthubgh.com/" />
     <meta property="og:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
     <meta property="og:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
-    <meta property="og:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
+    <meta property="og:image" content="/smarthubgh/SMART-HUB-LOGO-ORIGINAL.png" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -21,7 +52,7 @@
     <meta property="twitter:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
     <meta property="twitter:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
     
-    <link rel="icon" type="image/png" href="/SMART-HUB-LOGO-ORIGINAL.png" />
+    <link rel="icon" type="image/png" href="/smarthubgh/SMART-HUB-LOGO-ORIGINAL.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -117,7 +148,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-CMREEi27.js"></script>
+  <script type="module" crossorigin src="/smarthubgh/assets/index-B9SxmBb4.js"></script>
 </head>
   <body>
     <div id="root"></div>
