@@ -6,6 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SMART HUB GH - Empowering Ghanaian Youth</title>
     <meta name="description" content="SMART HUB GH is a youth-led organization in Ghana empowering the next generation through digital innovation, health advocacy (SRHR), and community leadership." />
+
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://esm.sh; frame-ancestors 'none';" />
+
+    <!-- SPA Redirect: restore path from GitHub Pages 404 redirect -->
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+        // Handle ?p= redirect from 404.html
+        var search = window.location.search;
+        if (search) {
+          var matched = search.slice(1).split('&').reduce(function(o, item) {
+            var parts = item.split('='); o[parts[0]] = parts.slice(1).join('=').replace(/~and~/g,'&'); return o;
+          }, {});
+          if (matched.p) {
+            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p;
+            if (matched.q) newUrl += '?' + matched.q;
+            window.history.replaceState(null, null, newUrl);
+          }
+        }
+      })();
+    </script>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -117,7 +148,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/smarthubgh/assets/index-CNzrgPjh.js"></script>
+  <script type="module" crossorigin src="/smarthubgh/assets/index-B9SxmBb4.js"></script>
 </head>
   <body>
     <div id="root"></div>
