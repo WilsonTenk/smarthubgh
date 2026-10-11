@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { projectsData } from '../data';
 import { getAssetPath } from '../utils/assetPath';
+import RotatingFocusWord from './RotatingFocusWord';
 import './HomeHero.css';
 
 const photos = [
@@ -15,9 +16,9 @@ export const HomeHero: React.FC = () => (
   <section id="home-hero" className="home-hero" aria-labelledby="home-heading">
     <div className="home-intro">
       <p className="home-eyebrow">Young people. Shared possibilities.</p>
-      <h1 id="home-heading" className="home-heading">
-        <span>Brighter futures.</span>
-        <span>Built <span className="home-highlight">together.</span></span>
+      <h1 id="home-heading" className="home-heading" aria-label="Empowering Youth Through Health, Advocacy and Education">
+        <span>Empowering Youth</span>
+        <span>Through <span className="home-highlight"><RotatingFocusWord /></span></span>
       </h1>
       <p className="home-lead">We connect young people across Ghana with the knowledge, care and opportunities to shape their own futures.</p>
       <div className="home-actions">

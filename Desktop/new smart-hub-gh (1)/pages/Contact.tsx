@@ -94,8 +94,8 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-black text-sm md:text-base text-brand-navy dark:text-white uppercase tracking-widest mb-1 transition-colors">Email</h3>
-                    <a href="mailto:shub80746@gmail.com" className="text-gray-500 dark:text-slate-400 text-sm md:text-lg hover:text-brand-blue transition-colors font-medium border-b border-transparent hover:border-brand-blue transition-all">
-                      shub80746@gmail.com
+                    <a href="mailto:admin@smarthubgh.com" className="text-gray-500 dark:text-slate-400 text-sm md:text-lg hover:text-brand-blue transition-colors font-medium border-b border-transparent hover:border-brand-blue transition-all">
+                      admin@smarthubgh.com
                     </a>
                   </div>
                 </div>

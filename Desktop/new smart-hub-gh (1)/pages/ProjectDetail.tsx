@@ -5,6 +5,7 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowLeft, Calendar, Users, MapPin, Award } from 'lucide-react';
 import { projectsData } from '../data';
 import BlogCover from '../components/BlogCover';
+import { getImageDimensions } from '../utils/imageDimensions';
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -135,6 +136,7 @@ const ProjectDetail: React.FC = () => {
                   <div className="relative group rounded-2xl overflow-hidden border-2 border-white/10 hover:border-brand-green/50 transition-all duration-500">
                     <img
                       src={img}
+                      {...getImageDimensions(img)}
                       alt={`${project.title} - Photo ${i + 1}`}
                       className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                       loading="lazy"

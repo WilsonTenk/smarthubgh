@@ -1,38 +1,40 @@
 
-import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useTransform, animate, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { leadershipData, partnersData } from '../data';
 import { Users, Globe, Layers, CheckCircle2, X } from 'lucide-react';
 import { LeadershipMember } from '../types';
 
-const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix = "" }) => {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
-  const [displayValue, setDisplayValue] = useState(0);
-
-  useEffect(() => {
-    const controls = animate(count, value, { duration: 2, ease: "easeOut" });
-    return controls.stop;
-  }, [value]);
-
-  useEffect(() => {
-    return rounded.on("change", (v) => setDisplayValue(v));
-  }, [rounded]);
-
-  return <span>{displayValue}{suffix}</span>;
-};
+const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix = "" }) => (
+  <span className="tabular-nums">{value}{suffix}</span>
+);
 
 const About: React.FC = () => {
   const [selectedLeader, setSelectedLeader] = useState<LeadershipMember | null>(null);
+  const reduceMotion = useReducedMotion();
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!selectedLeader) return;
+
+    const trigger = document.activeElement as HTMLElement | null;
+    const closeButton = dialogRef.current?.querySelector<HTMLButtonElement>('button');
+    closeButton?.focus({ preventScroll: true });
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedLeader(null);
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        closeButton?.focus({ preventScroll: true });
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+    };
+  }, [selectedLeader]);
 
   return (
     <div className="bg-white dark:bg-brand-navy min-h-screen transition-colors duration-300">
@@ -111,14 +113,14 @@ const About: React.FC = () => {
           </AnimatedSection>
         </div>
 
-        <div className="relative flex overflow-hidden">
-          <div className="flex animate-marquee whitespace-nowrap py-4">
-            {[...partnersData, ...partnersData].map((partner, i) => (
-              <div key={i} className="mx-8 md:mx-16 flex items-center gap-4 group cursor-pointer">
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-100 dark:bg-white/5 rounded-2xl flex items-center justify-center p-2 grayscale group-hover:grayscale-0 transition-all duration-500 overflow-hidden">
-                  <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain opacity-50 group-hover:opacity-100" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 py-4">
+            {partnersData.map((partner) => (
+              <div key={partner.name} className="flex items-center gap-4">
+                <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 bg-slate-100 dark:bg-white/5 rounded-2xl flex items-center justify-center p-2 overflow-hidden">
+                  <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
                 </div>
-                <span className="text-sm md:text-lg font-black uppercase tracking-widest text-slate-300 dark:text-slate-600 group-hover:text-brand-blue transition-colors">
+                <span className="text-sm md:text-lg font-black uppercase tracking-widest text-slate-600 dark:text-slate-300">
                   {partner.name}
                 </span>
               </div>
@@ -184,34 +186,46 @@ const About: React.FC = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {leadershipData.map((leader, idx) => (
-              <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="group text-center cursor-pointer" onClick={() => setSelectedLeader(leader)}>
-                <motion.div layoutId={`leader-image-${leader.name}`} className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
-                  <img src={leader.image} alt={leader.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" />
-                </motion.div>
-                <h4 className="text-base md:text-lg font-black text-brand-navy dark:text-white uppercase tracking-tight">{leader.name}</h4>
-                <p className="text-brand-blue font-black uppercase text-[9px] md:text-[10px] tracking-[0.2em] mt-1">{leader.role}</p>
-                {leader.occupation && <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">{leader.occupation}</p>}
+              <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="text-center">
+                <button type="button" onClick={() => setSelectedLeader(leader)} aria-haspopup="dialog" aria-label={`View ${leader.name}'s profile`} className="w-full text-center rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue">
+                  <div className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
+                    <img src={leader.image} alt={leader.name} className="w-full h-full object-cover" />
+                  </div>
+                  <h4 className="text-base md:text-lg font-black text-brand-navy dark:text-white uppercase tracking-tight">{leader.name}</h4>
+                  <p className="text-brand-blue font-black uppercase text-[9px] md:text-[10px] tracking-[0.2em] mt-1">{leader.role}</p>
+                  {leader.occupation && <p className="text-slate-500 dark:text-slate-400 text-xs font-medium mt-1">{leader.occupation}</p>}
+                </button>
               </AnimatedSection>
             ))}
           </div>
         </div>
 
-        <AnimatePresence>
+        {createPortal(<AnimatePresence initial={false}>
           {selectedLeader && (
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
-              className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-brand-navy/80 backdrop-blur-sm"
+              transition={{ duration: reduceMotion ? 0 : 0.18, ease: 'easeOut' }}
+              className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-brand-navy/80"
               onClick={() => setSelectedLeader(null)}
             >
               <motion.div 
-                layoutId={`leader-image-${selectedLeader.name}`} 
+                ref={dialogRef}
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+                transition={{ duration: reduceMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="leader-profile-title"
                 className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button 
+                  type="button"
                   onClick={() => setSelectedLeader(null)}
+                  aria-label="Close leadership profile"
                   className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors"
                 >
                   <X size={20} />
@@ -220,7 +234,7 @@ const About: React.FC = () => {
                   <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 md:p-8 flex-1 overflow-y-auto">
-                  <h3 className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tight mb-2">{selectedLeader.name}</h3>
+                  <h3 id="leader-profile-title" className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tight mb-2">{selectedLeader.name}</h3>
                   <div className="mb-6 flex flex-col gap-1">
                     <span className="text-brand-blue font-black uppercase text-xs tracking-[0.2em]">{selectedLeader.role}</span>
                     {selectedLeader.occupation && <span className="text-slate-500 dark:text-slate-400 font-medium text-sm">{selectedLeader.occupation}</span>}
@@ -232,7 +246,7 @@ const About: React.FC = () => {
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>, document.body)}
       </section>
     </div>
   );

@@ -5,7 +5,7 @@ export const projectsData: Project[] = [
   {
     id: "reach-for-her",
     title: "Reach for Her: Menstrual Health and Dignity",
-    period: "June 2026",
+    period: "January – June 2026",
     completedOn: "2026-06",
     listedOn: "2026-10-11",
     category: "Menstrual Health & SRHR",
@@ -14,7 +14,7 @@ export const projectsData: Project[] = [
     communities: "Liati Teikrom, Nyagbo Odumase, Nyagbo Gagbafe — Afadjato South District",
     reach: "395 participants: 214 females and 181 males",
     description: "Promoted menstrual health and dignity through school-based education, community dialogues, sanitary pad distribution, and three Dignity Banks in Afadjato South District.",
-    fullContent: "Reach for Her: Menstrual Health and Dignity was implemented in June 2026 by SMART Youth Connekt (SMART Hub), with support from the Youth Challenge Fund Phase 4, in Afadjato South District, Volta Region, Ghana. Through school-based education, community dialogues, sanitary pad distribution, and the establishment of three Dignity Banks in Liati Teikrom, Nyagbo Odumase, and Nyagbo Gagbafe, it promoted menstrual health management and sexual and reproductive health and rights (SRHR). The project reached 395 people, including 214 females and 181 males, exceeding its target of 250 participants by 58%. It improved adolescents’ knowledge of menstrual hygiene and SRHR, strengthened community support for menstrual health discussions, and helped girls manage their periods with greater confidence while improving access to sanitary products. Community engagement and an assessment of the Government Free Sanitary Pad Programme contributed to raising awareness, addressing menstrual stigma, and promoting a more supportive environment for menstrual dignity and adolescent well-being."
+    fullContent: "Reach for Her: Menstrual Health and Dignity was implemented from January to June 2026 by SMART Youth Connekt (SMART Hub), with support from the Youth Challenge Fund Phase 4, in Afadjato South District, Volta Region, Ghana. Through school-based education, community dialogues, sanitary pad distribution, and the establishment of three Dignity Banks in Liati Teikrom, Nyagbo Odumase, and Nyagbo Gagbafe, it promoted menstrual health management and sexual and reproductive health and rights (SRHR). The project reached 395 people, including 214 females and 181 males, exceeding its target of 250 participants by 58%. It improved adolescents’ knowledge of menstrual hygiene and SRHR, strengthened community support for menstrual health discussions, and helped girls manage their periods with greater confidence while improving access to sanitary products. Community engagement and an assessment of the Government Free Sanitary Pad Programme contributed to raising awareness, addressing menstrual stigma, and promoting a more supportive environment for menstrual dignity and adolescent well-being."
   },
   {
     id: "brave-movement",
@@ -244,7 +244,7 @@ export const blogData: BlogPost[] = [
     excerpt: "Reach for Her reached 395 people in Ghana’s Afadjato South District, combining menstrual health education, community dialogue, sanitary pad distribution, and three Dignity Banks.",
     content: [
       "<h2>Supporting menstrual dignity in Afadjato South</h2>",
-      "<p>In <strong>June 2026</strong>, <em>Reach for Her: Menstrual Health and Dignity</em> brought menstrual health education and practical support to communities in Afadjato South District, Volta Region, Ghana. Implemented by <strong>SMART Youth Connekt (SMART Hub)</strong>, with support from the <strong>Youth Challenge Fund Phase 4</strong>, the project promoted menstrual health management and sexual and reproductive health and rights (SRHR).</p>",
+      "<p>From <strong>January to June 2026</strong>, <em>Reach for Her: Menstrual Health and Dignity</em> brought menstrual health education and practical support to communities in Afadjato South District, Volta Region, Ghana. Implemented by <strong>SMART Youth Connekt (SMART Hub)</strong>, with support from the <strong>Youth Challenge Fund Phase 4</strong>, the project promoted menstrual health management and sexual and reproductive health and rights (SRHR).</p>",
       "<h2>Building knowledge and confidence</h2>",
       "<p>Through school-based education, Reach for Her improved adolescents’ knowledge of menstrual hygiene and SRHR. Alongside practical support, these activities helped girls manage their periods with greater confidence.</p>",
       "<p>Community dialogues strengthened support for menstrual health discussions and helped address menstrual stigma. By involving both females and males, the initiative brought these conversations to a wider group of community members.</p>",
@@ -303,7 +303,7 @@ export const blogData: BlogPost[] = [
       "<h2>Education and community conversations</h2>",
       "<p>Community engagement and radio sensitization raised awareness of menstrual health and promoted the safe disposal of sanitary products. The project also strengthened adolescent clubs and equipped girls with knowledge to challenge menstrual stigma.</p>",
       "<h2>Continuing the conversation</h2>",
-      "<p>Menstrual health remains part of SMART Hub’s work. In June 2026, Reach for Her brought school-based education, community dialogues, sanitary pad distribution, and three Dignity Banks to Afadjato South District. Both projects highlight the value of combining health education with community support.</p>"
+      "<p>Menstrual health remains part of SMART Hub’s work. From January to June 2026, Reach for Her brought school-based education, community dialogues, sanitary pad distribution, and three Dignity Banks to Afadjato South District. Both projects highlight the value of combining health education with community support.</p>"
     ].join("")
   }
 ];

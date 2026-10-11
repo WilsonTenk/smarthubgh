@@ -6,15 +6,10 @@ import { getAssetPath } from '../utils/assetPath';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
   const location = useLocation();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const isHome = location.pathname === '/';
-
-  useEffect(() => {
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    setIsDark(isDarkMode);
-  }, []);
 
   useEffect(() => {
     setIsOpen(false);
@@ -131,7 +126,7 @@ const Navbar: React.FC = () => {
         id="mobile-navigation"
         aria-hidden={!isOpen}
         inert={!isOpen}
-        className={`lg:hidden fixed inset-0 ${isHome ? 'bg-[#F4F7FF] dark:bg-brand-navy' : 'bg-white dark:bg-slate-900'} z-[105] transition-all duration-500 flex flex-col justify-center items-center p-8 ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
+        className={`lg:hidden fixed inset-0 ${isHome ? 'bg-[#F4F7FF] dark:bg-brand-navy' : 'bg-white dark:bg-slate-900'} z-[105] transition-[opacity,transform] duration-200 ease-out flex flex-col justify-center items-center p-8 ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-3 opacity-0 pointer-events-none'
           }`}
       >
         <div className="flex flex-col gap-8 text-center">

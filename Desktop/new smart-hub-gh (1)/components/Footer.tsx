@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="sticky bottom-0 -z-0 w-full bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
+    <footer className="w-full bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
@@ -105,8 +105,8 @@ const Footer: React.FC = () => {
                   <Mail size={18} />
                   <span className="text-[10px] font-black uppercase tracking-widest">Email Us</span>
                 </div>
-                <a href="mailto:shub80746@gmail.com" className="text-brand-navy dark:text-white font-bold leading-snug hover:text-brand-blue transition-colors block border-b border-slate-200 dark:border-white/10 pb-1">
-                  shub80746@gmail.com
+                <a href="mailto:admin@smarthubgh.com" className="text-brand-navy dark:text-white font-bold leading-snug hover:text-brand-blue transition-colors block border-b border-slate-200 dark:border-white/10 pb-1">
+                  admin@smarthubgh.com
                 </a>
               </div>
             </div>
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
               © {currentYear} SMART HUB GH
             </p>
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
               className="text-[10px] font-black uppercase tracking-widest text-brand-navy dark:text-white hover:text-brand-blue transition-colors flex items-center gap-2 group"
             >
               Back to Top

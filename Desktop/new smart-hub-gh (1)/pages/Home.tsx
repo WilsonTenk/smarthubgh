@@ -32,7 +32,7 @@ const Home: React.FC = () => {
   const faqs = [
     {
       question: "How can I volunteer with SMART HUB GH?",
-      answer: "We welcome passionate individuals! Reach out via our contact page or email us directly at shub80746@gmail.com for current opportunities."
+      answer: "We welcome passionate individuals! Reach out via our contact page or email us directly at admin@smarthubgh.com for current opportunities."
     },
     {
       question: "Where are you located?",
@@ -215,15 +215,17 @@ const FAQItem: React.FC<{ question: string, answer: string, index: number }> = (
   const [isOpen, setIsOpen] = useState(false);
   return (
     <AnimatedSection direction="right" delay={index * 0.1} className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:shadow-lg transition-all duration-300">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-6 md:p-8 text-left group">
+      <button onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`} className="w-full flex items-center justify-between p-6 md:p-8 text-left group">
         <span className="text-base md:text-xl font-black text-brand-navy dark:text-white group-hover:text-brand-blue transition-colors leading-tight pr-6 tracking-tight">{question}</span>
         <span className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-xl bg-slate-50 dark:bg-white/10 text-brand-blue shadow-sm transition-all duration-500 flex items-center justify-center ${isOpen ? 'rotate-180 bg-brand-blue text-white' : ''}`}>
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div id={`faq-answer-${index}`} aria-hidden={!isOpen} className={`faq-panel ${isOpen ? 'faq-panel-open' : ''}`}>
+        <div className="min-h-0 overflow-hidden">
         <div className="px-6 md:px-8 pb-6 md:pb-8 text-slate-500 dark:text-slate-400 font-medium text-sm md:text-lg leading-relaxed border-t border-slate-100/30 dark:border-white/5 pt-6">
           {answer}
+        </div>
         </div>
       </div>
     </AnimatedSection>

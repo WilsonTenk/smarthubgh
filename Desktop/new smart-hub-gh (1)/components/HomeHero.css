@@ -59,6 +59,10 @@
 }
 .home-highlight::before { left: -6px; top: -5px; }
 .home-highlight::after { right: -6px; bottom: -5px; }
+.home-rotating-word { display: inline-grid; grid-template-areas: 'word'; vertical-align: baseline; }
+.home-word-size, .home-word-text { grid-area: word; white-space: nowrap; text-align: left; }
+.home-word-size { visibility: hidden; }
+.home-word-caret { display: inline-block; height: .75em; margin-left: 5px; border-right: 2px solid currentColor; vertical-align: -.02em; }
 .home-lead {
   max-width: 530px;
   margin: 22px auto 0;
@@ -149,6 +153,7 @@
   .home-story-stats dt { font-size: 10px; }
 }
 @media (max-width: 540px) {
+  .home-hero .home-heading { font-size: clamp(1.9rem, 7.8vw, 2.6rem); letter-spacing: -.055em; }
   .home-photo-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-photo:first-child { grid-column: 1 / -1; aspect-ratio: 1.7; }
   .home-photo:not(:first-child) { aspect-ratio: 1.15; }

@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { projectsData } from '../data';
+import { getImageDimensions } from '../utils/imageDimensions';
 
 // Shuffle an array using Fisher-Yates algorithm
 function shuffleArray<T>(arr: T[]): T[] {
@@ -48,6 +49,7 @@ const Gallery: React.FC = () => {
                 <img
                   src={item.src}
                   alt={item.caption}
+                  {...getImageDimensions(item.src)}
                   className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />

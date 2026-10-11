@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -15,45 +15,26 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   className = "",
   delay = 0,
-  direction = 'right',
   width,
   style,
   onClick
 }) => {
 
-  const getInitialPosition = () => {
-    switch (direction) {
-      // "right" means it comes FROM the right (swipes left)
-      case 'right': return { x: 100, opacity: 0 };
-      case 'left': return { x: -100, opacity: 0 };
-      case 'up': return { y: 60, opacity: 0 };
-      case 'down': return { y: -60, opacity: 0 };
-      default: return { x: 100, opacity: 0 };
-    }
-  };
-
-  const getAnimatePosition = () => {
-    switch (direction) {
-      case 'right': return { x: 0, opacity: 1 };
-      case 'left': return { x: 0, opacity: 1 };
-      case 'up': return { y: 0, opacity: 1 };
-      case 'down': return { y: 0, opacity: 1 };
-      default: return { x: 0, opacity: 1 };
-    }
-  };
+  const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
       onClick={onClick}
-      initial={getInitialPosition()}
-      whileInView={getAnimatePosition()}
-      viewport={{ once: true, margin: "-5% 0px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }} // Faster, snappier feel
-      className={`${className} transform-gpu`}
+      initial={reduceMotion ? false : { y: 10, opacity: 1 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1], delay: reduceMotion ? 0 : Math.min(delay, 0.12) }}
+      className={`animated-section ${className}`}
       style={{
         ...(width ? { width } : {}),
         ...style,
-        willChange: "transform, opacity" // Performance hint
+        // CSS hover transitions must not re-animate Motion's transform on every frame.
+        transitionProperty: 'color, background-color, border-color, box-shadow'
       }}
     >
       {children}
