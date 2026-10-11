@@ -1,12 +1,11 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Calendar, CheckCircle, ArrowUpRight, Heart, Lightbulb, Minus, Plus, Quote } from 'lucide-react';
+import { ArrowRight, Calendar, Minus, Plus, Quote } from 'lucide-react';
 import { AnimatedSection } from '../components/AnimatedSection';
 import BlogCover from '../components/BlogCover';
 import { blogData, projectsData } from '../data';
-import { getAssetPath } from '../utils/assetPath';
+import { HomeHero, HomeStory } from '../components/HomeHero';
 import { sortBlogsNewestFirst, sortProjectsNewestFirst } from '../utils/contentOrder';
 
 const testimonials = [
@@ -30,63 +29,6 @@ const testimonials = [
 const Home: React.FC = () => {
   const featuredProjects = sortProjectsNewestFirst(projectsData).slice(0, 2);
   const recentPosts = sortBlogsNewestFirst(blogData).slice(0, 3);
-  const [textIndex, setTextIndex] = useState(0);
-
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    getAssetPath('/images/slide-1.png'),
-    getAssetPath('/images/slide-2.png'),
-    getAssetPath('/images/slide-3.png')
-  ];
-
-  useEffect(() => {
-    const slideTimer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(slideTimer);
-  }, []);
-
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, 150]);
-
-  const headlines = [
-    {
-      top: "Unlocking",
-      mid: "Potential",
-      bottom: "Across Ghana.",
-      color: "text-brand-blue",
-      underline: "text-brand-green/20"
-    },
-    {
-      top: "Committed to",
-      mid: "IMPACT",
-      bottom: "NOW!",
-      color: "text-brand-green",
-      underline: "text-brand-blue/20"
-    }
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTextIndex((prev) => (prev + 1) % headlines.length);
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
-  const lineVariants = {
-    initial: { x: 40, opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" } // Simplified physics
-    },
-    exit: {
-      x: -20,
-      opacity: 0,
-      transition: { duration: 0.4 }
-    }
-  };
-
   const faqs = [
     {
       question: "How can I volunteer with SMART HUB GH?",
@@ -103,159 +45,10 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-brand-navy transition-colors duration-300">
+    <div className="flex flex-col min-h-screen overflow-x-clip bg-white dark:bg-brand-navy transition-colors duration-300">
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-32 md:pt-40 pb-16 overflow-hidden bg-white dark:bg-slate-900 transition-colors duration-300">
-        <motion.div
-          style={{ y: y1 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl aspect-square bg-brand-blue/[0.04] dark:bg-brand-blue/[0.08] rounded-full blur-3xl transform-gpu pointer-events-none will-change-transform"
-        ></motion.div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            <div className="lg:col-span-7 flex flex-col justify-center">
-              <AnimatedSection direction="right" delay={0.1} className="mb-6">
-                <div className="inline-flex items-center gap-3 px-5 py-2 rounded-xl bg-white dark:bg-white/5 shadow-sm border border-slate-100 dark:border-white/5">
-                  <span className="flex h-2 w-2 rounded-full bg-brand-green animate-pulse"></span>
-                  <span className="text-brand-navy dark:text-white font-black text-[10px] uppercase tracking-[0.3em]">Smart Youth Connect LBG</span>
-                </div>
-              </AnimatedSection>
-
-              <div className="relative mb-8 md:mb-10 overflow-hidden min-h-[140px] sm:min-h-[220px] md:min-h-[300px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={textIndex}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="flex flex-col gap-1 md:gap-2"
-                  >
-                    <div className="overflow-hidden">
-                      <motion.span variants={lineVariants} className="block text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-brand-navy dark:text-white font-black tracking-tighter leading-[1.05]">
-                        {headlines[textIndex].top}
-                      </motion.span>
-                    </div>
-                    <div className="overflow-hidden py-1">
-                      <motion.span variants={lineVariants} className={`block text-5xl sm:text-7xl md:text-8xl xl:text-9xl ${headlines[textIndex].color} font-black tracking-tighter leading-[1.05] relative inline-block transition-colors duration-500`}>
-                        {headlines[textIndex].mid}
-                      </motion.span>
-                    </div>
-                    <div className="overflow-hidden">
-                      <motion.span variants={lineVariants} className="block text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-brand-navy dark:text-white font-black tracking-tighter leading-[1.05]">
-                        {headlines[textIndex].bottom}
-                      </motion.span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              <AnimatedSection direction="right" delay={0.6} className="max-w-xl">
-                <p className="text-base md:text-xl text-slate-500 dark:text-slate-400 mb-8 font-medium leading-relaxed">
-                  Bridging the gap between <span className="text-brand-navy dark:text-white font-black">raw potential</span> and <span className="text-brand-navy dark:text-white font-black">impactful advocacy</span> across Ghana.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link to="/contact" className="group px-8 py-4 bg-brand-navy dark:bg-white text-white dark:text-brand-navy font-black text-base rounded-xl shadow-xl hover:bg-brand-blue dark:hover:bg-brand-green transition-all duration-300 flex items-center gap-3">
-                    Donate Now <ArrowRight size={20} className="group-hover:translate-x-1.5 transition-transform" />
-                  </Link>
-                  <Link to="/about" className="px-8 py-4 text-brand-navy dark:text-white font-black text-base rounded-xl border-2 border-slate-100 dark:border-white/10 hover:border-brand-blue dark:hover:border-brand-blue transition-all duration-300">
-                    Our Mandate
-                  </Link>
-                </div>
-              </AnimatedSection>
-            </div>
-
-            <div className="lg:col-span-5 relative mt-8 lg:mt-0">
-              <AnimatedSection direction="right" delay={0.8} className="relative">
-                <div className="relative w-full aspect-[4/5] max-w-[300px] sm:max-w-[380px] xl:max-w-[440px] mx-auto">
-                  <div className="absolute inset-0 bg-brand-blue/5 dark:bg-brand-blue/10 rounded-[3rem_1rem_3rem_1rem] -z-10 translate-x-4 translate-y-4"></div>
-                  <div className="relative w-full h-full rounded-[4rem_1.5rem_4rem_1.5rem] overflow-hidden shadow-2xl border-[8px] border-white dark:border-slate-800 z-10 bg-white dark:bg-slate-900">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentSlide}
-                        src={slides[currentSlide]}
-                        alt="Youth Impact"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 1 }}
-                        className="w-full h-full object-cover absolute inset-0"
-                        loading="eager" // Optimize LCP
-                        fetchPriority="high"
-                      />
-                    </AnimatePresence>
-                  </div>
-                  <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-12 bg-white dark:bg-slate-900 p-4 md:p-6 rounded-2xl shadow-xl border border-slate-50 dark:border-white/5 z-20 flex items-center gap-4 max-w-[160px] md:max-w-[220px]"
-                  >
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-green/10 rounded-xl flex items-center justify-center text-brand-green shrink-0">
-                      <CheckCircle size={24} />
-                    </div>
-                    <div>
-                      <p className="text-lg md:text-xl font-black text-brand-navy dark:text-white leading-none">5 Years</p>
-                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-slate-400 mt-1">Impact Record</p>
-                    </div>
-                  </motion.div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Marquee */}
-      <div className="bg-white dark:bg-brand-navy border-y border-slate-100 dark:border-white/5 py-8 md:py-10 overflow-hidden whitespace-nowrap relative z-10 transition-colors transform-gpu">
-        <div className="inline-block animate-marquee">
-          {[...Array(6)].map((_, i) => (
-            <span key={i} className="text-slate-300 dark:text-slate-700 font-black text-sm md:text-base mx-8 md:mx-12 uppercase tracking-[0.4em] inline-flex items-center">
-              Empower <span className="text-brand-green mx-4 opacity-50">•</span> Advocate <span className="text-brand-blue mx-4 opacity-50">•</span> Lead <span className="text-brand-green mx-4 opacity-50">•</span> Innovation <span className="text-brand-blue mx-4 opacity-50">•</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Summary Section */}
-      <section className="py-16 md:py-24 bg-white dark:bg-brand-navy transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-            <AnimatedSection direction="right" className="relative order-2 lg:order-1">
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-xl border-[12px] border-slate-50 dark:border-white/5">
-                <img
-                  src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=2070&auto=format&fit=crop"
-                  alt="Team Action"
-                  className="w-full h-[350px] md:h-[450px] object-cover"
-                />
-                <div className="absolute bottom-6 left-6 bg-brand-navy dark:bg-slate-900 text-white p-6 md:p-8 rounded-2xl shadow-2xl">
-                  <p className="text-brand-green font-black text-4xl md:text-5xl tracking-tighter leading-none">5,000+</p>
-                  <p className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-slate-400 mt-2">Lives Impacted</p>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection direction="right" delay={0.2} className="order-1 lg:order-2">
-              <div className="mb-6 flex items-center gap-4">
-                <span className="h-1 w-12 bg-brand-green"></span>
-                <span className="text-brand-blue font-black uppercase tracking-[0.3em] text-[10px] md:text-xs">Our Global Mandate</span>
-              </div>
-              <h2 className="text-3xl md:text-6xl text-brand-navy dark:text-white mb-8 font-black tracking-tighter">
-                Championing <span className="text-brand-blue">Health</span>, Education & Rights.
-              </h2>
-              <p className="text-slate-500 dark:text-slate-400 text-base md:text-xl leading-relaxed mb-10 font-medium">
-                Reshaping the Ghanaian landscape by building a generation of youth who are healthy, competent, and digitally empowered.
-              </p>
-              <Link to="/about" className="inline-flex items-center gap-4 text-brand-navy dark:text-white font-black text-lg md:text-xl hover:text-brand-blue transition-all group">
-                About the SMART Hub
-                <span className="bg-brand-navy dark:bg-white text-white dark:text-brand-navy rounded-full p-2.5 shadow-lg group-hover:bg-brand-blue transition-all">
-                  <ArrowUpRight size={20} />
-                </span>
-              </Link>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
+      <HomeHero />
+      <HomeStory />
 
       {/* Featured Projects */}
       <section id="recent-projects" aria-labelledby="recent-projects-heading" className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50 transition-colors">
