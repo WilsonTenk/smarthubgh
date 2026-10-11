@@ -30,14 +30,15 @@
             var parts = item.split('='); o[parts[0]] = parts.slice(1).join('=').replace(/~and~/g,'&'); return o;
           }, {});
           if (matched.p) {
-            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p;
+            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p.replace(/^\/+/, '');
             if (matched.q) newUrl += '?' + matched.q;
+            newUrl += window.location.hash;
             window.history.replaceState(null, null, newUrl);
           }
         }
       })();
     </script>
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://smarthubgh.com/" />
@@ -51,7 +52,7 @@
     <meta property="twitter:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
     <meta property="twitter:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
     <meta property="twitter:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
-    
+
     <link rel="icon" type="image/png" href="/smarthubgh/SMART-HUB-LOGO-ORIGINAL.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +72,7 @@
           extend: {
             fontFamily: {
               sans: ['Plus Jakarta Sans', 'sans-serif'],
-              display: ['Plus Jakarta Sans', 'sans-serif'], 
+              display: ['Plus Jakarta Sans', 'sans-serif'],
             },
             colors: {
               brand: {
@@ -79,7 +80,7 @@
                 navy: '#0B1121',      /* Deep Background Blue */
                 green: '#00D26A',     /* Subtle Green Accent */
                 light: '#F8FAFC',     /* Light Slate */
-                dark: '#020617'       
+                dark: '#020617'
               }
             },
             animation: {
@@ -148,9 +149,9 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/smarthubgh/assets/index-B9SxmBb4.js"></script>
+  <script type="module" crossorigin src="/smarthubgh/assets/index-iZP5hRy-.js"></script>
 </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
 </body>
 </html>

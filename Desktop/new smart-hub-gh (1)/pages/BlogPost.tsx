@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import { blogData } from '../data';
+import BlogCover from '../components/BlogCover';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ const BlogPost: React.FC = () => {
              
              <div className="flex flex-wrap items-center gap-6 mb-6 text-[10px] font-black text-white/80 uppercase tracking-[0.2em]">
                 <span className="flex items-center gap-2 text-brand-green"><Tag size={16} /> {post.category}</span>
-                <span className="flex items-center gap-2"><Calendar size={16} /> {post.date}</span>
+                {post.date && <span className="flex items-center gap-2"><Calendar size={16} /> {post.date}</span>}
                 <span className="flex items-center gap-2"><User size={16} /> {post.author}</span>
              </div>
 
@@ -45,7 +46,7 @@ const BlogPost: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 pb-20">
          <AnimatedSection direction="up" delay={0.2} className="mb-12">
             <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-[350px] md:h-[500px] w-full border-[8px] border-white dark:border-slate-800">
-               <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+               <BlogCover post={post} />
             </div>
          </AnimatedSection>
 
@@ -54,8 +55,19 @@ const BlogPost: React.FC = () => {
                <p className="text-xl md:text-3xl font-black text-brand-navy dark:text-white leading-tight border-l-8 border-brand-green pl-8 transition-colors">
                  {post.excerpt}
                </p>
-               <div className="blog-content prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/><br/>') }} />
+               <div className="blog-content prose dark:prose-invert max-w-none [&_h2]:text-2xl md:[&_h2]:text-3xl [&_h2]:font-black [&_h2]:text-brand-navy dark:[&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:mb-2" dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/><br/>') }} />
             </div>
+
+            {post.galleryImages && post.galleryImages.length > 0 && (
+              <section aria-label="Project photos" className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {post.galleryImages.map(photo => (
+                  <figure key={photo.src}>
+                    <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-2xl" />
+                    {photo.caption && <figcaption className="mt-3 text-sm text-gray-600 dark:text-slate-400">{photo.caption}</figcaption>}
+                  </figure>
+                ))}
+              </section>
+            )}
 
             <div className="py-12 border-t border-gray-100 dark:border-white/10 mt-16">
                 <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white uppercase mb-8 tracking-tighter transition-colors">Share Impact</h3>

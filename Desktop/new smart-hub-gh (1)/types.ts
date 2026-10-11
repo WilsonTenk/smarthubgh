@@ -32,10 +32,12 @@ export interface LeadershipMember {
 export interface BlogPost {
   id: string;
   title: string;
-  date: string;
+  date?: string;
   excerpt: string;
   content: string;
-  image: string;
+  image?: string;
+  imageAlt?: string;
+  galleryImages?: { src: string; alt: string; caption?: string }[];
   author: string;
   category: string;
 }

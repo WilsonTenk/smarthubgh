@@ -216,6 +216,30 @@ export const projectsData: Project[] = [
 
 export const blogData: BlogPost[] = [
   {
+    id: "reach-for-her-menstrual-health-and-dignity",
+    title: "Reach for Her: Menstrual Health and Dignity",
+    category: "Health",
+    author: "SMART Youth Connekt (SMART Hub)",
+    excerpt: "Reach for Her reached 395 people in Ghana’s Afadjato South District, combining menstrual health education, community dialogue, sanitary pad distribution, and three Dignity Banks.",
+    content: [
+      "<h2>Supporting menstrual dignity in Afadjato South</h2>",
+      "<p><em>Reach for Her: Menstrual Health and Dignity</em> brought menstrual health education and practical support to communities in Afadjato South District, Volta Region, Ghana. Implemented by <strong>SMART Youth Connekt (SMART Hub)</strong>, with support from the <strong>Youth Challenge Fund Phase 4</strong>, the project promoted menstrual health management and sexual and reproductive health and rights (SRHR).</p>",
+      "<h2>Building knowledge and confidence</h2>",
+      "<p>Through school-based education, Reach for Her improved adolescents’ knowledge of menstrual hygiene and SRHR. Alongside practical support, these activities helped girls manage their periods with greater confidence.</p>",
+      "<p>Community dialogues strengthened support for menstrual health discussions and helped address menstrual stigma. By involving both females and males, the initiative brought these conversations to a wider group of community members.</p>",
+      "<h2>Three communities, three Dignity Banks</h2>",
+      "<p>The project combined sanitary pad distribution with the establishment of three Dignity Banks:</p>",
+      "<ul><li>Liati Teikrom</li><li>Nyagbo Odumase</li><li>Nyagbo Gagbafe</li></ul>",
+      "<p>These activities improved access to sanitary products and complemented the project’s education and community engagement, supporting girls in managing menstruation with dignity.</p>",
+      "<h2>Reaching beyond the target</h2>",
+      "<p>Reach for Her reached <strong>395 people</strong>, including <strong>214 females and 181 males</strong>. Against an initial target of <strong>250 participants</strong>, the project reached 145 more people than planned, exceeding its target by <strong>58%</strong>.</p>",
+      "<p>This reach extended menstrual health and SRHR education, practical support, and community dialogue to more participants than originally anticipated.</p>",
+      "<h2>Connecting community experience with programme assessment</h2>",
+      "<p>Alongside its community activities, Reach for Her included an assessment of the <strong>Government Free Sanitary Pad Programme</strong>. Together, the assessment and community engagement contributed to raising awareness, addressing menstrual stigma, and promoting a more supportive environment for menstrual dignity and adolescent well-being.</p>",
+      "<p>Through education, access to sanitary products, and stronger community support, Reach for Her helped adolescents build knowledge and confidence around menstrual health.</p>"
+    ].join("")
+  },
+  {
     id: "breaking-silence-havedzi",
     title: "Breaking the Silence: Havedzi Community Speaks Up",
     date: "August 25, 2025",

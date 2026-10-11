@@ -30,8 +30,9 @@
             var parts = item.split('='); o[parts[0]] = parts.slice(1).join('=').replace(/~and~/g,'&'); return o;
           }, {});
           if (matched.p) {
-            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p;
+            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p.replace(/^\/+/, '');
             if (matched.q) newUrl += '?' + matched.q;
+            newUrl += window.location.hash;
             window.history.replaceState(null, null, newUrl);
           }
         }
