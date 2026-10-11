@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { usePrefersReducedMotion } from '../utils/usePrefersReducedMotion';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { leadershipData, partnersData } from '../data';
 import { Users, Globe, Layers, CheckCircle2, X } from 'lucide-react';
@@ -13,7 +14,7 @@ const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix =
 
 const About: React.FC = () => {
   const [selectedLeader, setSelectedLeader] = useState<LeadershipMember | null>(null);
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { usePrefersReducedMotion } from '../utils/usePrefersReducedMotion';
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   onClick
 }) => {
 
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
 
   return (
     <motion.div

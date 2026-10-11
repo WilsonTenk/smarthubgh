@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import { usePrefersReducedMotion } from '../utils/usePrefersReducedMotion';
 
 const words = ['Health', 'Advocacy', 'Education'];
 type Phase = 'holding' | 'deleting' | 'waiting' | 'typing';
 const initial = { index: 0, text: words[0], phase: 'holding' as Phase };
 
 const RotatingFocusWord: React.FC = () => {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const [state, setState] = useState(initial);
   const [visible, setVisible] = useState(() => !document.hidden);
 

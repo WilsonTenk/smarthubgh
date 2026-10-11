@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { MotionConfig } from 'framer-motion';
+import { usePrefersReducedMotion } from './utils/usePrefersReducedMotion';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -24,8 +25,9 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
+  const reduceMotion = usePrefersReducedMotion();
   return (
-    <MotionConfig reducedMotion="user">
+    <MotionConfig reducedMotion={reduceMotion ? 'always' : 'never'}>
       <BrowserRouter basename="/smarthubgh">
         <ScrollToTop />
         <div className="flex flex-col min-h-screen font-sans text-gray-900 dark:text-white bg-white dark:bg-brand-navy transition-colors duration-300">
