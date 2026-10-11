@@ -17,11 +17,11 @@ function shuffleArray<T>(arr: T[]): T[] {
 const Gallery: React.FC = () => {
   // Collect all images — thumbnail + gallery images for every project
   const allImages = useMemo(() => {
-    const imgs: { src: string; caption: string }[] = [];
+    const imgs: { src: string; caption: string; alt: string }[] = [];
     projectsData.forEach(p => {
-      if (p.image) imgs.push({ src: p.image, caption: p.title });
+      if (p.image) imgs.push({ src: p.image, caption: p.title, alt: p.imageAlt || p.title });
       if (p.galleryImages) {
-        p.galleryImages.forEach(g => imgs.push({ src: g, caption: p.title }));
+        p.galleryImages.filter(g => g !== p.image).forEach(g => imgs.push({ src: g, caption: p.title, alt: p.title }));
       }
     });
     // Shuffle so each page refresh shows a different arrangement
@@ -48,7 +48,7 @@ const Gallery: React.FC = () => {
               <div className="relative group rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-white/5">
                 <img
                   src={item.src}
-                  alt={item.caption}
+                  alt={item.alt}
                   {...getImageDimensions(item.src)}
                   className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"

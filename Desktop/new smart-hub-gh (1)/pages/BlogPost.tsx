@@ -5,6 +5,7 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import { blogData } from '../data';
 import BlogCover from '../components/BlogCover';
+import { getImageDimensions } from '../utils/imageDimensions';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +19,9 @@ const BlogPost: React.FC = () => {
       </div>
     );
   }
+
+  const containCover = Boolean(post.image && post.imageFit === 'contain');
+  const coverDimensions = post.image ? getImageDimensions(post.image) : undefined;
 
   return (
     <div className="bg-brand-light dark:bg-brand-navy min-h-screen transition-colors duration-300">
@@ -46,9 +50,16 @@ const BlogPost: React.FC = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 relative z-10 pb-20">
          <AnimatedSection direction="up" delay={0.2} className="mb-12">
-            <div className="rounded-[2.5rem] overflow-hidden shadow-2xl h-[350px] md:h-[500px] w-full border-[8px] border-white dark:border-slate-800">
-               <BlogCover post={post} />
-            </div>
+            <figure>
+               <div className={`rounded-[2.5rem] overflow-hidden shadow-2xl w-full border-[8px] border-white dark:border-slate-800 ${containCover ? '' : 'h-[350px] md:h-[500px]'}`}>
+                  {containCover ? (
+                    <div style={{ aspectRatio: coverDimensions ? `${coverDimensions.width} / ${coverDimensions.height}` : '16 / 9' }}>
+                       <BlogCover post={post} />
+                    </div>
+                  ) : <BlogCover post={post} />}
+               </div>
+               {post.imageCaption && <figcaption className="mt-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{post.imageCaption}</figcaption>}
+            </figure>
          </AnimatedSection>
 
          <AnimatedSection direction="up" delay={0.3} className="bg-white dark:bg-slate-900 p-8 md:p-16 rounded-[2.5rem] shadow-sm mb-12 border border-slate-50 dark:border-white/5 transition-colors">

@@ -1,5 +1,6 @@
 // Intrinsic sizes of existing public photos reserve space before lazy images load.
 const dimensions: Record<string, { width: number; height: number }> = {
+  "reach-for-her-school-activity.jpg": { width: 1503, height: 1046 },
   "IMG-20221012-WA0013.jpg": {
     "width": 1000,
     "height": 1250

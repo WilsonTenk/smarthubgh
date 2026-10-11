@@ -1,14 +1,16 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { BlogPost } from '../types';
+import { getImageDimensions } from '../utils/imageDimensions';
 
 interface BlogCoverProps {
-  post: Pick<BlogPost, 'title' | 'image' | 'imageAlt'>;
+  post: Pick<BlogPost, 'title' | 'image' | 'imageAlt' | 'imageFit'>;
 }
 
 const BlogCover: React.FC<BlogCoverProps> = ({ post }) => {
   if (post.image) {
-    return <img src={post.image} alt={post.imageAlt || post.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />;
+    const dimensions = getImageDimensions(post.image);
+    return <img src={post.image} alt={post.imageAlt || post.title} width={dimensions?.width} height={dimensions?.height} className={`w-full h-full ${post.imageFit === 'contain' ? 'object-contain bg-brand-light dark:bg-brand-navy' : 'object-cover transition-transform duration-700 hover:scale-110'}`} />;
   }
 
   return (

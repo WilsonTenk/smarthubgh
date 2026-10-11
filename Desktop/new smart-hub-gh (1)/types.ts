@@ -11,6 +11,8 @@ export interface Project {
   reach: string;
   description: string;
   image?: string;
+  imageAlt?: string;
+  imageFit?: 'cover' | 'contain';
   fullContent?: string; // For the detailed view
   galleryImages?: string[]; // For the collage
 }
@@ -42,6 +44,8 @@ export interface BlogPost {
   content: string;
   image?: string;
   imageAlt?: string;
+  imageFit?: 'cover' | 'contain';
+  imageCaption?: string;
   galleryImages?: { src: string; alt: string; caption?: string }[];
   author: string;
   category: string;

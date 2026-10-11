@@ -121,11 +121,11 @@ const ProjectDetail: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <AnimatedSection direction="up" className="text-center mb-16">
               <h2 className="font-display text-5xl md:text-7xl text-white uppercase tracking-tighter">Impact <span className="text-brand-green">Visuals</span></h2>
-              <p className="text-slate-400 mt-4 text-lg font-medium">{project.galleryImages.length} photos from this project</p>
+              <p className="text-slate-400 mt-4 text-lg font-medium">{project.galleryImages.length} {project.galleryImages.length === 1 ? 'photo' : 'photos'} from this project</p>
             </AnimatedSection>
 
             {/* Responsive masonry-style grid */}
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+            <div className={project.galleryImages.length === 1 ? 'max-w-4xl mx-auto' : 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4'}>
               {project.galleryImages.map((img, i) => (
                 <AnimatedSection
                   key={i}
@@ -137,8 +137,8 @@ const ProjectDetail: React.FC = () => {
                     <img
                       src={img}
                       {...getImageDimensions(img)}
-                      alt={`${project.title} - Photo ${i + 1}`}
-                      className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      alt={img === project.image && project.imageAlt ? project.imageAlt : `${project.title} - Photo ${i + 1}`}
+                      className={`w-full h-auto object-cover ${project.imageFit === 'contain' ? '' : 'transform group-hover:scale-105 transition-transform duration-700'}`}
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/30 transition-colors duration-300" />
