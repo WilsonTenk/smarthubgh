@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { Calendar, Users, ArrowRight } from 'lucide-react';
 import { projectsData } from '../data';
+import BlogCover from '../components/BlogCover';
+import { sortProjectsNewestFirst } from '../utils/contentOrder';
 
 const Projects: React.FC = () => {
   return (
@@ -23,11 +25,11 @@ const Projects: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {projectsData.map((project, index) => (
+          {sortProjectsNewestFirst(projectsData).map((project, index) => (
             <AnimatedSection key={project.id} direction="up" delay={index * 0.1} className="h-full">
               <div className="group bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 flex flex-col h-full">
                 <div className="relative overflow-hidden h-52 md:h-64">
-                   <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                   <BlogCover post={project} />
                    <div className="absolute top-4 left-4">
                       <span className="bg-brand-blue text-white text-[9px] md:text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-lg shadow-lg">
                         {project.sponsor}

@@ -5,6 +5,7 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowRight, Calendar, User } from 'lucide-react';
 import { blogData } from '../data';
 import BlogCover from '../components/BlogCover';
+import { sortBlogsNewestFirst } from '../utils/contentOrder';
 
 const Blog: React.FC = () => {
   return (
@@ -22,7 +23,7 @@ const Blog: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-           {blogData.map((post, index) => (
+           {sortBlogsNewestFirst(blogData).map((post, index) => (
              <AnimatedSection key={post.id} direction="up" delay={index * 0.1} className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full">
                 <div className="h-56 overflow-hidden relative">
                    <BlogCover post={post} />
@@ -34,7 +35,7 @@ const Blog: React.FC = () => {
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
                    <div className="flex flex-wrap items-center gap-4 text-[10px] font-black text-gray-400 dark:text-slate-500 uppercase tracking-widest mb-4 transition-colors">
-                      {post.date && <span className="flex items-center gap-1"><Calendar size={14} className="text-brand-green" /> {post.date}</span>}
+                      {(post.updatedAt || post.date) && <span className="flex items-center gap-1"><Calendar size={14} className="text-brand-green" /> {post.updatedAt ? `Updated ${post.updatedAt}` : post.date}</span>}
                       <span className="flex items-center gap-1"><User size={14} className="text-brand-green" /> {post.author}</span>
                    </div>
                    <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white uppercase mb-4 tracking-tight line-clamp-2 flex-grow hover:text-brand-blue transition-colors">

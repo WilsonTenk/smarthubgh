@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowLeft, Calendar, Users, MapPin, Award } from 'lucide-react';
 import { projectsData } from '../data';
+import BlogCover from '../components/BlogCover';
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,12 +23,12 @@ const ProjectDetail: React.FC = () => {
     <div className="bg-white dark:bg-brand-navy min-h-screen transition-colors duration-300">
 
       {/* Hero Image */}
-      <div className="relative h-[60vh] bg-brand-navy overflow-hidden">
+      <div className="relative min-h-[60vh] bg-brand-navy overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-60" />
+          <div className="w-full h-full opacity-60"><BlogCover post={project} /></div>
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full p-4 sm:p-8 lg:p-12">
+        <div className="relative w-full px-4 sm:px-8 lg:px-12 pt-32 md:pt-40 pb-8 lg:pb-12">
           <div className="max-w-7xl mx-auto">
             <Link to="/projects" className="inline-flex items-center gap-2 text-white/80 hover:text-brand-green mb-6 transition-colors font-display uppercase tracking-widest text-sm">
               <ArrowLeft size={16} /> Back to Projects
@@ -35,6 +36,7 @@ const ProjectDetail: React.FC = () => {
             <h1 className="font-display text-5xl md:text-7xl text-white uppercase leading-tight mb-4 tracking-tighter">
               {project.title}
             </h1>
+            {project.category && <p className="text-brand-green font-bold">{project.category}</p>}
           </div>
         </div>
       </div>
@@ -93,6 +95,11 @@ const ProjectDetail: React.FC = () => {
               <h2 className="text-3xl md:text-4xl font-black uppercase text-brand-navy dark:text-white mb-8 tracking-tighter">Overview</h2>
               <div className="text-gray-600 dark:text-slate-400 font-medium leading-relaxed space-y-6 text-base md:text-xl transition-colors">
                 <p>{project.fullContent || project.description}</p>
+                {project.relatedBlogId && (
+                  <Link to={`/blog/${project.relatedBlogId}`} className="inline-flex items-center gap-2 text-brand-blue font-black hover:underline">
+                    Read the full project story
+                  </Link>
+                )}
                 <p>
                   Established to bridge the gap between opportunity and capacity, SMART HUB GH focuses on equipping children, adolescents, and youth with the knowledge, tools, and platforms they need to make informed decisions about their health, careers, and communities.
                 </p>

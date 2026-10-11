@@ -2,6 +2,10 @@ export interface Project {
   id: string;
   title: string;
   period?: string;
+  completedOn?: string; // Confirmed completion date or month (YYYY-MM[-DD]).
+  listedOn?: string; // Website publication date, separate from the project period.
+  category?: string;
+  relatedBlogId?: string;
   sponsor: string;
   communities: string;
   reach: string;
@@ -33,6 +37,7 @@ export interface BlogPost {
   id: string;
   title: string;
   date?: string;
+  updatedAt?: string;
   excerpt: string;
   content: string;
   image?: string;

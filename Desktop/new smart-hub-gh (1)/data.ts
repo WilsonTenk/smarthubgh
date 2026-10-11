@@ -3,9 +3,24 @@ import { getAssetPath } from './utils/assetPath';
 
 export const projectsData: Project[] = [
   {
+    id: "reach-for-her",
+    title: "Reach for Her: Menstrual Health and Dignity",
+    period: "June 2026",
+    completedOn: "2026-06",
+    listedOn: "2026-10-11",
+    category: "Menstrual Health & SRHR",
+    relatedBlogId: "reach-for-her-menstrual-health-and-dignity",
+    sponsor: "Youth Challenge Fund Phase 4",
+    communities: "Liati Teikrom, Nyagbo Odumase, Nyagbo Gagbafe — Afadjato South District",
+    reach: "395 participants: 214 females and 181 males",
+    description: "Promoted menstrual health and dignity through school-based education, community dialogues, sanitary pad distribution, and three Dignity Banks in Afadjato South District.",
+    fullContent: "Reach for Her: Menstrual Health and Dignity was implemented in June 2026 by SMART Youth Connekt (SMART Hub), with support from the Youth Challenge Fund Phase 4, in Afadjato South District, Volta Region, Ghana. Through school-based education, community dialogues, sanitary pad distribution, and the establishment of three Dignity Banks in Liati Teikrom, Nyagbo Odumase, and Nyagbo Gagbafe, it promoted menstrual health management and sexual and reproductive health and rights (SRHR). The project reached 395 people, including 214 females and 181 males, exceeding its target of 250 participants by 58%. It improved adolescents’ knowledge of menstrual hygiene and SRHR, strengthened community support for menstrual health discussions, and helped girls manage their periods with greater confidence while improving access to sanitary products. Community engagement and an assessment of the Government Free Sanitary Pad Programme contributed to raising awareness, addressing menstrual stigma, and promoting a more supportive environment for menstrual dignity and adolescent well-being."
+  },
+  {
     id: "brave-movement",
     title: "Brave Movement Community Engagement",
     period: "Aug 2025",
+    completedOn: "2025-08-23",
     sponsor: "Brave Movement Ghana",
     communities: "Havedzi",
     reach: "83 community members",
@@ -54,6 +69,7 @@ export const projectsData: Project[] = [
     id: "empower-her",
     title: "Empower HER Project",
     period: "Feb – Aug 2024",
+    completedOn: "2024-08",
     sponsor: "Plan International Ghana",
     communities: "Ve-Golokwati, Ve-Wudome",
     reach: "297 beneficiaries",
@@ -79,6 +95,7 @@ export const projectsData: Project[] = [
     id: "safe-flow",
     title: "Safe Flow Project",
     period: "Oct 2023 – Feb 2024",
+    completedOn: "2024-02",
     sponsor: "Plan International Ghana",
     communities: "Adaklu-Ablornu, Sogakope-Fievie",
     reach: "393 beneficiaries",
@@ -103,6 +120,7 @@ export const projectsData: Project[] = [
     id: "i-decide",
     title: "I Decide Drive",
     period: "Oct 2022 – Feb 2023",
+    completedOn: "2023-02",
     sponsor: "Plan International Ghana",
     communities: "Afadjato South, South Tongu, Hohoe",
     reach: "1,200+ beneficiaries",
@@ -128,6 +146,7 @@ export const projectsData: Project[] = [
     id: "smart-girl",
     title: "SMART Girl Project",
     period: "Aug 2021 – Feb 2022",
+    completedOn: "2022-02",
     sponsor: "Plan International Ghana",
     communities: "Ve-Wudome, Ve-Golokwati",
     reach: "325 beneficiaries",
@@ -150,6 +169,7 @@ export const projectsData: Project[] = [
     id: "covid-19",
     title: "COVID-19 Campaign",
     period: "Mar – Jul 2020",
+    completedOn: "2020-07",
     sponsor: "SMART HUB GH",
     communities: "Adaklu-Ablornu",
     reach: "300+ school children",
@@ -218,12 +238,13 @@ export const blogData: BlogPost[] = [
   {
     id: "reach-for-her-menstrual-health-and-dignity",
     title: "Reach for Her: Menstrual Health and Dignity",
+    date: "October 11, 2026",
     category: "Health",
     author: "SMART Youth Connekt (SMART Hub)",
     excerpt: "Reach for Her reached 395 people in Ghana’s Afadjato South District, combining menstrual health education, community dialogue, sanitary pad distribution, and three Dignity Banks.",
     content: [
       "<h2>Supporting menstrual dignity in Afadjato South</h2>",
-      "<p><em>Reach for Her: Menstrual Health and Dignity</em> brought menstrual health education and practical support to communities in Afadjato South District, Volta Region, Ghana. Implemented by <strong>SMART Youth Connekt (SMART Hub)</strong>, with support from the <strong>Youth Challenge Fund Phase 4</strong>, the project promoted menstrual health management and sexual and reproductive health and rights (SRHR).</p>",
+      "<p>In <strong>June 2026</strong>, <em>Reach for Her: Menstrual Health and Dignity</em> brought menstrual health education and practical support to communities in Afadjato South District, Volta Region, Ghana. Implemented by <strong>SMART Youth Connekt (SMART Hub)</strong>, with support from the <strong>Youth Challenge Fund Phase 4</strong>, the project promoted menstrual health management and sexual and reproductive health and rights (SRHR).</p>",
       "<h2>Building knowledge and confidence</h2>",
       "<p>Through school-based education, Reach for Her improved adolescents’ knowledge of menstrual hygiene and SRHR. Alongside practical support, these activities helped girls manage their periods with greater confidence.</p>",
       "<p>Community dialogues strengthened support for menstrual health discussions and helped address menstrual stigma. By involving both females and males, the initiative brought these conversations to a wider group of community members.</p>",
@@ -253,21 +274,37 @@ export const blogData: BlogPost[] = [
     id: "digital-skills-youth",
     title: "Why Digital Skills are Vital for Ghanaian Youth",
     date: "July 15, 2025",
+    updatedAt: "October 11, 2026",
     category: "Education",
     author: "Program Coordinator",
     image: getAssetPath("/images/digi-thumb.jpg"),
-    excerpt: "Exploring the impact of the Digi-Health Impact Project and the future of work.",
-    content: "In a rapidly evolving digital world, the gap between opportunity and capacity is widening. Our Digi-Health Impact Project seeks to bridge this gap by equipping high school students with essential Microsoft Office and Graphic Design skills..."
+    excerpt: "The Digi-Health Impact Project combined digital skills training and SRHR education, reaching 720 beneficiaries in Ketu South District with support from KGL Foundation.",
+    content: [
+      "<h2>Connecting digital skills and health education</h2>",
+      "<p>The Digi-Health Impact Project (DHIP), supported by KGL Foundation, brought digital skills training and sexual and reproductive health and rights (SRHR) education to high school students in Ketu South District. The project reached 720 beneficiaries.</p>",
+      "<h2>Practical tools for the future of work</h2>",
+      "<p>Training covered Microsoft Office Suite, graphics design, and cybersecurity. These skills supported young people’s digital literacy and employability, helping them prepare for the modern workplace.</p>",
+      "<h2>Information for informed decisions</h2>",
+      "<p>Alongside digital training, an SRHR education campaign equipped participants with reproductive health knowledge. The project connected preparation for work with the information young people need to make informed decisions about their health.</p>"
+    ].join("")
   },
   {
     id: "menstrual-hygiene-matters",
     title: "Menstrual Hygiene: Ending the Stigma",
     date: "May 28, 2025",
+    updatedAt: "October 11, 2026",
     category: "Health",
     author: "Health Team",
     image: getAssetPath("/images/hygiene-3.jpg"),
-    excerpt: "Reflections from the Safe Flow Project and our work in Adaklu-Ablornu.",
-    content: "Menstruation is a natural biological process, yet it remains shrouded in silence and stigma in many communities. Through the Safe Flow Project, we are changing the narrative..."
+    excerpt: "Reflecting on how the Safe Flow Project combined menstrual hygiene education, waste management, and community engagement to support 393 beneficiaries.",
+    content: [
+      "<h2>Supporting menstrual health through Safe Flow</h2>",
+      "<p>The Safe Flow Project ran from October 2023 to February 2024 in Adaklu-Ablornu and Sogakope-Fievie, with support from Plan International Ghana. It reached 393 beneficiaries through work focused on menstrual hygiene, waste management, and adolescent health advocacy.</p>",
+      "<h2>Education and community conversations</h2>",
+      "<p>Community engagement and radio sensitization raised awareness of menstrual health and promoted the safe disposal of sanitary products. The project also strengthened adolescent clubs and equipped girls with knowledge to challenge menstrual stigma.</p>",
+      "<h2>Continuing the conversation</h2>",
+      "<p>Menstrual health remains part of SMART Hub’s work. In June 2026, Reach for Her brought school-based education, community dialogues, sanitary pad distribution, and three Dignity Banks to Afadjato South District. Both projects highlight the value of combining health education with community support.</p>"
+    ].join("")
   }
 ];
 

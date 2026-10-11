@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 import { BlogPost } from '../types';
 
 interface BlogCoverProps {
-  post: BlogPost;
+  post: Pick<BlogPost, 'title' | 'image' | 'imageAlt'>;
 }
 
 const BlogCover: React.FC<BlogCoverProps> = ({ post }) => {

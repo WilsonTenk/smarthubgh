@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, CheckCircle, ArrowUpRight, Heart, Lightbulb, Minus, Plus, Quote } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle, ArrowUpRight, Heart, Lightbulb, Minus, Plus, Quote } from 'lucide-react';
 import { AnimatedSection } from '../components/AnimatedSection';
-import { projectsData } from '../data';
+import BlogCover from '../components/BlogCover';
+import { blogData, projectsData } from '../data';
 import { getAssetPath } from '../utils/assetPath';
+import { sortBlogsNewestFirst, sortProjectsNewestFirst } from '../utils/contentOrder';
 
 const testimonials = [
   {
@@ -26,7 +28,8 @@ const testimonials = [
 ];
 
 const Home: React.FC = () => {
-  const featuredProjects = projectsData.slice(0, 2);
+  const featuredProjects = sortProjectsNewestFirst(projectsData).slice(0, 2);
+  const recentPosts = sortBlogsNewestFirst(blogData).slice(0, 3);
   const [textIndex, setTextIndex] = useState(0);
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -255,12 +258,12 @@ const Home: React.FC = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50 transition-colors">
+      <section id="recent-projects" aria-labelledby="recent-projects-heading" className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
             <AnimatedSection direction="right">
-              <h2 className="text-4xl md:text-7xl text-brand-navy dark:text-white font-black tracking-tighter uppercase">Making <span className="text-brand-blue">History</span></h2>
-              <p className="text-slate-400 dark:text-slate-500 mt-2 text-base md:text-xl font-medium">Proof of our commitment in the field.</p>
+              <h2 id="recent-projects-heading" className="text-4xl md:text-7xl text-brand-navy dark:text-white font-black tracking-tighter uppercase">Recent <span className="text-brand-blue">Projects</span></h2>
+              <p className="text-slate-400 dark:text-slate-500 mt-2 text-base md:text-xl font-medium">Our latest work in the communities we serve.</p>
             </AnimatedSection>
             <Link to="/projects" className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-brand-navy dark:text-white hover:text-brand-blue transition-all text-xs md:text-sm group">
               All Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -271,7 +274,7 @@ const Home: React.FC = () => {
             {featuredProjects.map((project, i) => (
               <AnimatedSection key={project.id} direction="up" delay={i * 0.1} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 dark:border-white/5">
                 <div className="h-[250px] md:h-[350px] overflow-hidden relative">
-                  <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <BlogCover post={project} />
                   <div className="absolute top-4 left-4">
                     <span className="bg-white/95 dark:bg-brand-navy/95 text-brand-navy dark:text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-lg shadow-sm">
                       {project.sponsor}
@@ -292,6 +295,54 @@ const Home: React.FC = () => {
                     <span className="text-[9px] md:text-[10px] font-black text-slate-300 dark:text-slate-700 uppercase tracking-widest">{project.period}</span>
                   </div>
                 </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Activities & Blogs */}
+      <section id="recent-activities" aria-labelledby="recent-activities-heading" className="py-16 md:py-24 bg-white dark:bg-brand-navy transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
+            <AnimatedSection direction="right">
+              <h2 id="recent-activities-heading" className="text-4xl md:text-6xl text-brand-navy dark:text-white font-black tracking-tighter uppercase">
+                Recent Activities <span className="text-brand-blue">& Blogs</span>
+              </h2>
+              <p className="text-slate-400 dark:text-slate-500 mt-2 text-base md:text-xl font-medium">The latest stories and updates from our communities.</p>
+            </AnimatedSection>
+            <Link to="/blog" className="flex items-center gap-3 font-black uppercase tracking-[0.2em] text-brand-navy dark:text-white hover:text-brand-blue transition-all text-xs md:text-sm group shrink-0">
+              View All Blogs <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {recentPosts.map((post, index) => (
+              <AnimatedSection key={post.id} direction="up" delay={index * 0.1} className="group h-full bg-slate-50 dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500">
+                <article className="flex flex-col h-full">
+                  <Link to={`/blog/${post.id}`} aria-label={`Read ${post.title}`} className="block h-56 overflow-hidden relative shrink-0">
+                    <BlogCover post={post} />
+                    <span className="absolute top-4 left-4 bg-brand-green text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-lg shadow-sm">
+                      {post.category}
+                    </span>
+                  </Link>
+                  <div className="p-8 flex flex-col flex-grow">
+                    {(post.updatedAt || post.date) && (
+                      <p className="flex items-center gap-2 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
+                        <Calendar size={14} aria-hidden="true" className="text-brand-green" /> {post.updatedAt ? `Updated ${post.updatedAt}` : post.date}
+                      </p>
+                    )}
+                    <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white mb-4 tracking-tight leading-tight hover:text-brand-blue transition-colors">
+                      <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                    </h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base font-medium mb-8 line-clamp-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <Link to={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-brand-blue font-black uppercase tracking-widest hover:text-brand-navy dark:hover:text-white text-[11px] mt-auto">
+                      Read Article <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </article>
               </AnimatedSection>
             ))}
           </div>

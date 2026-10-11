@@ -32,7 +32,8 @@ const BlogPost: React.FC = () => {
              
              <div className="flex flex-wrap items-center gap-6 mb-6 text-[10px] font-black text-white/80 uppercase tracking-[0.2em]">
                 <span className="flex items-center gap-2 text-brand-green"><Tag size={16} /> {post.category}</span>
-                {post.date && <span className="flex items-center gap-2"><Calendar size={16} /> {post.date}</span>}
+                {post.date && <span className="flex items-center gap-2"><Calendar size={16} /> Published {post.date}</span>}
+                {post.updatedAt && <span className="flex items-center gap-2"><Calendar size={16} /> Updated {post.updatedAt}</span>}
                 <span className="flex items-center gap-2"><User size={16} /> {post.author}</span>
              </div>
 
