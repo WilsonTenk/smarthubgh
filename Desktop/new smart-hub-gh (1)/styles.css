@@ -1,6 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source(none);
+@config "./tailwind.config.cjs";
+@source "./App.tsx";
+@source "./components";
+@source "./pages";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  *, ::before, ::after { border-color: #e5e7eb; }
+  button, [role="button"] { cursor: pointer; }
+  input::placeholder, textarea::placeholder { color: #9ca3af; opacity: 1; }
+}
 
 
 @font-face {
@@ -39,6 +48,7 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@layer base {
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
@@ -72,3 +82,25 @@ p { letter-spacing: .01em; }
   }
   .animated-section { transform: none !important; }
 }
+}
+
+/* Keep the previous typography cascade when responsive font sizes change. */
+@layer utilities {
+  @media (min-width: 48rem) {
+    [class*="md:text-"] { --tw-leading: initial; }
+  }
+  @media (min-width: 64rem) {
+    [class*="lg:text-"] { --tw-leading: initial; }
+  }
+}
+h1, h1[class], .font-display, .font-black { font-weight: 800; }
+h2, h2[class], h3, h3[class], h4, h4[class] { font-weight: 700; }
+.font-display { letter-spacing: -.04em; line-height: 1.15; }
+@media (min-width: 48rem) {
+  .md\:text-xl { line-height: 1.75rem; }
+  .md\:text-2xl { line-height: 2rem; }
+  .md\:text-3xl { line-height: 2.25rem; }
+  .md\:text-4xl { line-height: 2.5rem; }
+  .md\:text-5xl, .md\:text-6xl, .md\:text-7xl, .md\:text-8xl, .md\:text-9xl { line-height: 1; }
+}
+.blog-content h2 { font-weight: 900; }

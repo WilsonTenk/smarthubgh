@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { projectsData } from '../data';
 import { getAssetPath } from '../utils/assetPath';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 import RotatingFocusWord from './RotatingFocusWord';
 import './HomeHero.css';
 
@@ -17,7 +18,7 @@ export const HomeHero: React.FC = () => (
     <div className="home-intro">
       <p className="home-eyebrow">Young people. Shared possibilities.</p>
       <h1 id="home-heading" className="home-heading" aria-label="Empowering Youth Through Health, Advocacy and Education">
-        <span>Empowering Youth</span>
+        <span>Empowering Youth</span>{' '}
         <span>Through <span className="home-highlight"><RotatingFocusWord /></span></span>
       </h1>
       <p className="home-lead">We connect young people across Ghana with the knowledge, care and opportunities to shape their own futures.</p>
@@ -34,7 +35,7 @@ export const HomeHero: React.FC = () => (
     <div className="home-photo-strip" aria-label="SMART Hub community, skills and health projects">
       {photos.map((photo, index) => (
         <div className="home-photo" key={photo.file}>
-          <img src={getAssetPath(`/images/${photo.file}`)} alt={photo.alt} width={photo.width} height={photo.height}
+          <img {...getResponsiveImageProps(getAssetPath(`/images/${photo.file}`), `(max-width: 540px) ${index === 0 ? '90vw' : '43vw'}, (max-width: 1168px) 30vw, 360px`)} alt={photo.alt}
             style={{ objectPosition: photo.position }} decoding="async" fetchPriority={index === 0 ? 'high' : 'auto'} />
         </div>
       ))}
@@ -67,9 +68,9 @@ export const HomeStory: React.FC = () => (
         </div>
       </div>
       <div className="home-story-media">
-        <img className="home-story-photo" src={getAssetPath('/images/digi-4.jpg')}
+        <img className="home-story-photo" {...getResponsiveImageProps(getAssetPath('/images/digi-4.jpg'), '(min-width: 1168px) 784px, (min-width: 981px) 65vw, 90vw')}
           alt="SMART Hub team and community participants gathered for a group photo outside a school."
-          width={2000} height={1245} loading="lazy" decoding="async" />
+          loading="lazy" decoding="async" />
         <dl className="home-story-stats">
           <div><dt>Lives impacted</dt><dd>5,000+</dd></div>
           <div><dt>Projects & initiatives</dt><dd>{projectsData.length}</dd></div>

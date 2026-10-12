@@ -5,7 +5,7 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import { ArrowLeft, Calendar, Users, MapPin, Award } from 'lucide-react';
 import { projectsData } from '../data';
 import BlogCover from '../components/BlogCover';
-import { getImageDimensions } from '../utils/imageDimensions';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,7 +26,7 @@ const ProjectDetail: React.FC = () => {
       {/* Hero Image */}
       <div className="relative min-h-[60vh] bg-brand-navy overflow-hidden flex items-end">
         <div className="absolute inset-0">
-          <div className="w-full h-full opacity-60"><BlogCover post={project} /></div>
+          <div className="w-full h-full opacity-60"><BlogCover post={project} loading="eager" sizes="100vw" /></div>
           <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
         </div>
         <div className="relative w-full px-4 sm:px-8 lg:px-12 pt-32 md:pt-40 pb-8 lg:pb-12">
@@ -135,11 +135,11 @@ const ProjectDetail: React.FC = () => {
                 >
                   <div className="relative group rounded-2xl overflow-hidden border-2 border-white/10 hover:border-brand-green/50 transition-all duration-500">
                     <img
-                      src={img}
-                      {...getImageDimensions(img)}
+                      {...getResponsiveImageProps(img, project.galleryImages!.length === 1 ? '(min-width: 1024px) 896px, 100vw' : '(min-width: 1280px) 300px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw')}
                       alt={img === project.image && project.imageAlt ? project.imageAlt : `${project.title} - Photo ${i + 1}`}
                       className={`w-full h-auto object-cover ${project.imageFit === 'contain' ? '' : 'transform group-hover:scale-105 transition-transform duration-700'}`}
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-brand-navy/0 group-hover:bg-brand-navy/30 transition-colors duration-300" />
                     <div className="absolute bottom-3 right-3 bg-brand-navy/80 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">

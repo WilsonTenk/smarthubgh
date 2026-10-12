@@ -6,6 +6,7 @@ import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import { blogData } from '../data';
 import BlogCover from '../components/BlogCover';
 import { getImageDimensions } from '../utils/imageDimensions';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,9 +55,9 @@ const BlogPost: React.FC = () => {
                <div className={`rounded-[2.5rem] overflow-hidden shadow-2xl w-full border-[8px] border-white dark:border-slate-800 ${containCover ? '' : 'h-[350px] md:h-[500px]'}`}>
                   {containCover ? (
                     <div style={{ aspectRatio: coverDimensions ? `${coverDimensions.width} / ${coverDimensions.height}` : '16 / 9' }}>
-                       <BlogCover post={post} />
+                       <BlogCover post={post} loading="eager" sizes="(min-width: 1024px) 896px, 100vw" />
                     </div>
-                  ) : <BlogCover post={post} />}
+                  ) : <BlogCover post={post} loading="eager" sizes="(min-width: 1024px) 896px, 100vw" />}
                </div>
                {post.imageCaption && <figcaption className="mt-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{post.imageCaption}</figcaption>}
             </figure>
@@ -74,7 +75,7 @@ const BlogPost: React.FC = () => {
               <section aria-label="Project photos" className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {post.galleryImages.map(photo => (
                   <figure key={photo.src}>
-                    <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-2xl" />
+                    <img {...getResponsiveImageProps(photo.src, '(min-width: 1024px) 400px, 100vw')} alt={photo.alt} loading="lazy" decoding="async" className="w-full rounded-2xl" />
                     {photo.caption && <figcaption className="mt-3 text-sm text-gray-600 dark:text-slate-400">{photo.caption}</figcaption>}
                   </figure>
                 ))}

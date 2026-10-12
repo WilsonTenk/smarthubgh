@@ -317,13 +317,13 @@ export const blogData: BlogPost[] = [
 ];
 
 export const partnersData: Partner[] = [
-  { name: "Plan International Ghana", logo: "https://placehold.co/400x200/white/0B1121?text=Plan+Intl+Ghana" },
-  { name: "KGL Foundation", logo: "https://placehold.co/400x200/white/0B1121?text=KGL+Foundation" },
-  { name: "Government Agencies", logo: "https://placehold.co/400x200/white/0B1121?text=Govt+Agencies" },
-  { name: "Religious Bodies", logo: "https://placehold.co/400x200/white/0B1121?text=Religious+Bodies" },
-  { name: "Developer's Net", logo: "https://placehold.co/400x200/white/0B1121?text=Developer's+Net" },
-  { name: "Brave Movement Ghana", logo: "https://placehold.co/400x200/white/0B1121?text=Brave+Movement" },
-  { name: "AfriYAN GHANA", logo: "https://placehold.co/400x200/white/0B1121?text=AfriYAN+GHANA" }
+  { name: "Plan International Ghana", logo: getAssetPath("/logos/partner-0.svg") },
+  { name: "KGL Foundation", logo: getAssetPath("/logos/partner-1.svg") },
+  { name: "Government Agencies", logo: getAssetPath("/logos/partner-2.svg") },
+  { name: "Religious Bodies", logo: getAssetPath("/logos/partner-3.svg") },
+  { name: "Developer's Net", logo: getAssetPath("/logos/partner-4.svg") },
+  { name: "Brave Movement Ghana", logo: getAssetPath("/logos/partner-5.svg") },
+  { name: "AfriYAN GHANA", logo: getAssetPath("/logos/partner-6.svg") }
 ];
 
 export const leadershipData: LeadershipMember[] = [

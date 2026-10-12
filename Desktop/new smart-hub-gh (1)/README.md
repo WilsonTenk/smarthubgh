@@ -1,20 +1,22 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# SMART Hub GH website
 
-# Run and deploy your AI Studio app
+React/Vite website for SMART Youth Connekt in Ghana, with static HTML for every
+page and responsive media. Production uses https://smarthubgh.com/ on cPanel.
 
-This contains everything you need to run your app locally.
+## Run and check
 
-View your app in AI Studio: https://ai.studio/apps/drive/19KV1jv-GyHoQVy3lCQjLVqs6BlgpgDcB
+```sh
+npm ci
+npm run dev
+npm run check
+npm run build
+npm run verify:build
+npm audit
+```
 
-## Run Locally
+Development serves the site at the root path. Images are prepared automatically
+before development and production builds; original photographs remain preserved.
+The website does not require an API key or a running Node server after building.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Read [DEPLOYMENT.md](DEPLOYMENT.md) for cPanel deployment, security headers,
+Search Console submission, and the separate GitHub Pages preview.

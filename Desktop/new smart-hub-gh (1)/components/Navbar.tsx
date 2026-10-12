@@ -1,15 +1,21 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Heart, Sun, Moon, ArrowUpRight } from 'lucide-react';
 import { getAssetPath } from '../utils/assetPath';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'));
+  const [isDark, setIsDark] = useState(false);
   const location = useLocation();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const isHome = location.pathname === '/';
+  const pathname = location.pathname.replace(/\/+$/, '') || '/';
+  const isHome = pathname === '/';
+
+  useLayoutEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+  }, []);
 
   useEffect(() => {
     setIsOpen(false);
@@ -34,10 +40,13 @@ const Navbar: React.FC = () => {
     setIsDark(newDark);
     if (newDark) {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+    }
+    try {
+      localStorage.setItem('theme', newDark ? 'dark' : 'light');
+    } catch {
+      // The current page can still change theme when browser storage is unavailable.
     }
   };
 
@@ -60,7 +69,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
 
           <Link to="/" className="flex items-center gap-3 group relative z-[110]">
-            <img src={getAssetPath("/SMART-HUB-LOGO-ORIGINAL.png")} alt="Smart Hub Logo" className={`${isHome ? 'h-12 md:h-14' : 'h-16'} w-auto object-contain`} />
+            <img {...getResponsiveImageProps(getAssetPath("/SMART-HUB-LOGO-ORIGINAL.png"), isHome ? '56px' : '64px')} alt="Smart Hub Logo" decoding="async" className={`${isHome ? 'h-12 md:h-14' : 'h-16'} w-auto object-contain`} />
           </Link>
 
           <div className={`hidden lg:flex items-center ${isHome ? 'gap-6' : 'gap-8'}`}>
@@ -69,11 +78,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  aria-current={location.pathname === link.path ? 'page' : undefined}
-                  className={`transition-all relative group py-1 ${isHome ? `text-[13px] font-semibold ${location.pathname === link.path ? 'text-brand-blue dark:text-white' : 'text-brand-navy/80 dark:text-white/80 hover:text-brand-blue dark:hover:text-white'}` : `text-[11px] font-bold tracking-[0.15em] uppercase ${location.pathname === link.path ? 'text-brand-blue' : 'text-slate-500 dark:text-slate-400 hover:text-brand-navy dark:hover:text-white'}`}`}
+                  aria-current={pathname === link.path ? 'page' : undefined}
+                  className={`transition-all relative group py-1 ${isHome ? `text-[13px] font-semibold ${pathname === link.path ? 'text-brand-blue dark:text-white' : 'text-brand-navy/80 dark:text-white/80 hover:text-brand-blue dark:hover:text-white'}` : `text-[11px] font-bold tracking-[0.15em] uppercase ${pathname === link.path ? 'text-brand-blue' : 'text-slate-500 dark:text-slate-400 hover:text-brand-navy dark:hover:text-white'}`}`}
                 >
                   {link.name}
-                  <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${isHome ? 'bg-brand-blue dark:bg-white' : 'bg-brand-blue'} ${location.pathname === link.path ? 'w-full' : ''}`}></span>
+                  <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${isHome ? 'bg-brand-blue dark:bg-white' : 'bg-brand-blue'} ${pathname === link.path ? 'w-full' : ''}`}></span>
                 </Link>
               ))}
             </div>
@@ -135,8 +144,8 @@ const Navbar: React.FC = () => {
               key={link.name}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              aria-current={location.pathname === link.path ? 'page' : undefined}
-              className={`text-4xl font-black tracking-tighter transition-all ${isHome ? (location.pathname === link.path ? 'text-brand-blue dark:text-white' : 'text-brand-navy/75 dark:text-white/75 hover:text-brand-blue dark:hover:text-white') : `uppercase ${location.pathname === link.path ? 'text-brand-blue' : 'text-slate-300 dark:text-slate-700 hover:text-brand-navy dark:hover:text-white'}`}`}
+              aria-current={pathname === link.path ? 'page' : undefined}
+              className={`text-4xl font-black tracking-tighter transition-all ${isHome ? (pathname === link.path ? 'text-brand-blue dark:text-white' : 'text-brand-navy/75 dark:text-white/75 hover:text-brand-blue dark:hover:text-white') : `uppercase ${pathname === link.path ? 'text-brand-blue' : 'text-slate-300 dark:text-slate-700 hover:text-brand-navy dark:hover:text-white'}`}`}
             >
               {link.name}
             </Link>

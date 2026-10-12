@@ -13,6 +13,8 @@ import Gallery from './pages/Gallery';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Contact from './pages/Contact';
+import Seo from './components/Seo';
+import NotFound from './pages/NotFound';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -24,11 +26,11 @@ const ScrollToTop = () => {
   return null;
 };
 
-const App: React.FC = () => {
+export const AppContent: React.FC = () => {
   const reduceMotion = usePrefersReducedMotion();
   return (
     <MotionConfig reducedMotion={reduceMotion ? 'always' : 'never'}>
-      <BrowserRouter basename="/smarthubgh">
+        <Seo />
         <ScrollToTop />
         <div className="flex flex-col min-h-screen font-sans text-gray-900 dark:text-white bg-white dark:bg-brand-navy transition-colors duration-300">
           <Navbar />
@@ -43,14 +45,19 @@ const App: React.FC = () => {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           </div>
           <Footer />
         </div>
-      </BrowserRouter>
     </MotionConfig>
   );
+};
+
+const App: React.FC = () => {
+  const basename = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '') || '/';
+  return <BrowserRouter basename={basename}><AppContent /></BrowserRouter>;
 };
 
 export default App;

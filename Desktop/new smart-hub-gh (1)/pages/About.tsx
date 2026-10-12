@@ -7,6 +7,7 @@ import { AnimatedSection } from '../components/AnimatedSection';
 import { leadershipData, partnersData } from '../data';
 import { Users, Globe, Layers, CheckCircle2, X } from 'lucide-react';
 import { LeadershipMember } from '../types';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix = "" }) => (
   <span className="tabular-nums">{value}{suffix}</span>
@@ -190,7 +191,7 @@ const About: React.FC = () => {
               <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="text-center">
                 <button type="button" onClick={() => setSelectedLeader(leader)} aria-haspopup="dialog" aria-label={`View ${leader.name}'s profile`} className="w-full text-center rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue">
                   <div className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
-                    <img src={leader.image} alt={leader.name} className="w-full h-full object-cover" />
+                    <img {...getResponsiveImageProps(leader.image, '(min-width: 1024px) 280px, 45vw')} alt={leader.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   </div>
                   <h4 className="text-base md:text-lg font-black text-brand-navy dark:text-white uppercase tracking-tight">{leader.name}</h4>
                   <p className="text-brand-blue font-black uppercase text-[9px] md:text-[10px] tracking-[0.2em] mt-1">{leader.role}</p>
@@ -201,7 +202,7 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {createPortal(<AnimatePresence initial={false}>
+        {typeof document !== 'undefined' && createPortal(<AnimatePresence initial={false}>
           {selectedLeader && (
             <motion.div 
               initial={{ opacity: 0 }} 
@@ -232,7 +233,7 @@ const About: React.FC = () => {
                   <X size={20} />
                 </button>
                 <div className="w-full md:w-2/5 aspect-square md:aspect-auto md:h-auto shrink-0 relative">
-                  <img src={selectedLeader.image} alt={selectedLeader.name} className="w-full h-full object-cover" />
+                  <img {...getResponsiveImageProps(selectedLeader.image, '(min-width: 768px) 450px, 90vw')} alt={selectedLeader.name} decoding="async" className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 md:p-8 flex-1 overflow-y-auto">
                   <h3 id="leader-profile-title" className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tight mb-2">{selectedLeader.name}</h3>

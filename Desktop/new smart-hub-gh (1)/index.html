@@ -1,83 +1,24 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GH">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SMART HUB GH - Empowering Ghanaian Youth</title>
-    <meta name="description" content="SMART HUB GH is a youth-led organization in Ghana empowering the next generation through digital innovation, health advocacy (SRHR), and community leadership." />
-
-    <!-- Security Headers -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <!-- page-seo -->
+    <!-- security-policy -->
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://esm.sh; frame-ancestors 'none';" />
-
-    <!-- SPA Redirect: restore path from GitHub Pages 404 redirect -->
+    <link rel="icon" type="image/png" href="%BASE_URL%SMART-HUB-LOGO-ORIGINAL.png" />
+    <link rel="preload" href="%BASE_URL%fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <script>
-      (function(){
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect !== location.href) {
-          history.replaceState(null, null, redirect);
-        }
-        // Handle ?p= redirect from 404.html
-        var search = window.location.search;
-        if (search) {
-          var matched = search.slice(1).split('&').reduce(function(o, item) {
-            var parts = item.split('='); o[parts[0]] = parts.slice(1).join('=').replace(/~and~/g,'&'); return o;
-          }, {});
-          if (matched.p) {
-            var newUrl = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/') + 1) + matched.p.replace(/^\/+/, '');
-            if (matched.q) newUrl += '?' + matched.q;
-            newUrl += window.location.hash;
-            window.history.replaceState(null, null, newUrl);
-          }
-        }
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem('theme'); } catch (error) {}
+        var dark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.toggle('dark', dark);
       })();
     </script>
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://smarthubgh.com/" />
-    <meta property="og:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
-    <meta property="og:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
-    <meta property="og:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://smarthubgh.com/" />
-    <meta property="twitter:title" content="SMART HUB GH - Empowering Ghanaian Youth" />
-    <meta property="twitter:description" content="Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy." />
-    <meta property="twitter:image" content="/SMART-HUB-LOGO-ORIGINAL.png" />
-    
-    <link rel="icon" type="image/png" href="/SMART-HUB-LOGO-ORIGINAL.png" />
-    <link rel="preload" href="/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <script>
-      // Initialize theme before content loads to prevent flicker
-      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "framer-motion": "https://esm.sh/framer-motion@^12.23.26"
-  }
-}
-</script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

@@ -2,13 +2,21 @@
 import React, { useMemo } from 'react';
 import { AnimatedSection } from '../components/AnimatedSection';
 import { projectsData } from '../data';
-import { getImageDimensions } from '../utils/imageDimensions';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
-// Shuffle an array using Fisher-Yates algorithm
+// A build seed keeps the initial server and browser photo order identical.
+const gallerySeed = import.meta.env.VITE_BUILD_SEED || 'smart-hub-gallery';
+
+// Shuffle an array using a seeded Fisher-Yates algorithm.
 function shuffleArray<T>(arr: T[]): T[] {
   const a = [...arr];
+  let state = 2166136261;
+  for (const character of gallerySeed) {
+    state = Math.imul(state ^ character.charCodeAt(0), 16777619) >>> 0;
+  }
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+    const j = Math.floor((state / 4294967296) * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
@@ -24,7 +32,7 @@ const Gallery: React.FC = () => {
         p.galleryImages.filter(g => g !== p.image).forEach(g => imgs.push({ src: g, caption: p.title, alt: p.title }));
       }
     });
-    // Shuffle so each page refresh shows a different arrangement
+    // Keep this arrangement stable throughout hydration and subsequent rendering.
     return shuffleArray(imgs);
   }, []);
 
@@ -35,7 +43,7 @@ const Gallery: React.FC = () => {
           <AnimatedSection direction="right">
             <h1 className="text-5xl md:text-8xl font-black uppercase mb-6 tracking-tighter">Our <span className="text-brand-green">Gallery</span></h1>
             <p className="text-base md:text-xl text-gray-400 max-w-2xl font-medium leading-relaxed">
-              Moments of impact, connection, and change captured across our various projects in Ghana. Refresh the page for a new arrangement!
+              Moments of impact, connection, and change captured across our various projects in Ghana.
             </p>
           </AnimatedSection>
         </div>
@@ -47,9 +55,9 @@ const Gallery: React.FC = () => {
             <AnimatedSection key={idx} direction="up" delay={Math.min(idx * 0.03, 0.5)} className="break-inside-avoid">
               <div className="relative group rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-white/5">
                 <img
-                  src={item.src}
+                  {...getResponsiveImageProps(item.src, '(min-width: 1024px) 400px, (min-width: 768px) 45vw, 100vw')}
                   alt={item.alt}
-                  {...getImageDimensions(item.src)}
+                  decoding="async"
                   className="w-full h-auto transform group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />

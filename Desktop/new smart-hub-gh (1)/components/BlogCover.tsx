@@ -1,16 +1,17 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import { BlogPost } from '../types';
-import { getImageDimensions } from '../utils/imageDimensions';
+import { getResponsiveImageProps } from '../utils/responsiveImage';
 
 interface BlogCoverProps {
   post: Pick<BlogPost, 'title' | 'image' | 'imageAlt' | 'imageFit'>;
+  loading?: 'eager' | 'lazy';
+  sizes?: string;
 }
 
-const BlogCover: React.FC<BlogCoverProps> = ({ post }) => {
+const BlogCover: React.FC<BlogCoverProps> = ({ post, loading = 'lazy', sizes = '(min-width: 1024px) 600px, (min-width: 768px) 45vw, 100vw' }) => {
   if (post.image) {
-    const dimensions = getImageDimensions(post.image);
-    return <img src={post.image} alt={post.imageAlt || post.title} width={dimensions?.width} height={dimensions?.height} className={`w-full h-full ${post.imageFit === 'contain' ? 'object-contain bg-brand-light dark:bg-brand-navy' : 'object-cover transition-transform duration-700 hover:scale-110'}`} />;
+    return <img {...getResponsiveImageProps(post.image, sizes)} alt={post.imageAlt || post.title} loading={loading} decoding="async" fetchPriority={loading === 'eager' ? 'high' : 'auto'} className={`w-full h-full ${post.imageFit === 'contain' ? 'object-contain bg-brand-light dark:bg-brand-navy' : 'object-cover transition-transform duration-700 hover:scale-110'}`} />;
   }
 
   return (

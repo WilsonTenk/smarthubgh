@@ -8,10 +8,11 @@ const initial = { index: 0, text: words[0], phase: 'holding' as Phase };
 const RotatingFocusWord: React.FC = () => {
   const reduceMotion = usePrefersReducedMotion();
   const [state, setState] = useState(initial);
-  const [visible, setVisible] = useState(() => !document.hidden);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const onVisibilityChange = () => setVisible(!document.hidden);
+    onVisibilityChange();
     document.addEventListener('visibilitychange', onVisibilityChange);
     return () => document.removeEventListener('visibilitychange', onVisibilityChange);
   }, []);
