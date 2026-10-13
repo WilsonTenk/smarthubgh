@@ -5,11 +5,15 @@ The committed `dist` directory is the production site. It contains HTML for all
 `robots.txt`, `sitemap.xml`, and Apache security/caching rules in `.htaccess`.
 It requires no Node process on the public server.
 
-In cPanel **Git Version Control**, open this repository, choose **Update from
+In cPanel **Git Version Control**, use this repository's **master** branch,
+open **Manage → Pull or Deploy**, choose **Update from
 Remote**, then **Deploy HEAD**. The repository's `.cpanel.yml` runs
 `deploy/cpanel.sh`, which asks cPanel for smarthubgh.com's actual document root,
 backs up overwritten files outside the public directory, and copies the built
-site including `.htaccess`. It retains unrelated server files. If the domain
+site including `.htaccess`. Published files use mode `644` and their directories
+use `755` so Apache can read styles, scripts, fonts, and images. It retains
+unrelated server files. The **gh-pages** branch serves only the GitHub Pages
+preview; use **master** for this domain. If the domain
 already points directly to the committed `dist` directory, pulling the commit is
 enough. The script stops when domain lookup or build validation fails.
 

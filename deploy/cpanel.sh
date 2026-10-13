@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+umask 022
 
 # cPanel runs this from the checkout when Deploy HEAD is selected.
 checkout_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -34,6 +35,8 @@ if ! grep -q 'https://smarthubgh.com/' "$build_directory/sitemap.xml" || grep -q
   exit 1
 fi
 if [[ "$document_root" == "$build_directory" ]]; then
+  find "$build_directory" -type d -exec chmod 755 -- {} +
+  find "$build_directory" -type f -exec chmod 644 -- {} +
   echo 'The domain already serves the committed production build directly.'
   exit 0
 fi
@@ -74,6 +77,7 @@ if [[ -f "$document_root/index.html" ]]; then
 fi
 
 # Publish resources first, pages second, and the policy last to avoid missing bundles.
+chmod 755 -- "$document_root"
 for phase in resources pages policy; do
   while IFS= read -r -d '' source_file; do
     relative_path="${source_file#"$build_directory"/}"
@@ -83,11 +87,18 @@ for phase in resources pages policy; do
       pages:*|policy:*) continue ;;
     esac
     destination="$document_root/$relative_path"
-    mkdir -p -- "$(dirname -- "$destination")"
+    destination_directory="$(dirname -- "$destination")"
+    mkdir -p -- "$destination_directory"
+    # Repair existing private directory modes as well as newly created folders.
+    while [[ "$destination_directory" != "$document_root" ]]; do
+      chmod 755 -- "$destination_directory"
+      destination_directory="$(dirname -- "$destination_directory")"
+    done
     cp -- "$source_file" "$destination"
     if [[ "$phase" == pages && -n "$verification_token" ]] && ! grep -qi 'name="google-site-verification"' "$destination"; then
       SMART_HUB_VERIFY_TOKEN="$verification_token" perl -0777 -i -pe 's/<head>/<head>\n<meta name="google-site-verification" content="$ENV{SMART_HUB_VERIFY_TOKEN}">/i' "$destination"
     fi
+    chmod 644 -- "$destination"
   done < <(find "$build_directory" -type f -print0)
 done
 echo "Deployed smarthubgh.com. Previous overwritten files: $backup_directory"
