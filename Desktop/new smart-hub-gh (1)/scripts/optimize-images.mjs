@@ -9,6 +9,8 @@ const outputDirectory = path.join(root, 'public/media');
 const cachePath = path.join(outputDirectory, '.image-cache.json');
 const photoWidths = [480, 960, 1600];
 const logoWidths = [96, 192, 384];
+const partnerLogoWidths = [192, 384, 768];
+const partnerLogos = new Set(['plan-international.jpg', 'kgl-foundation.png', 'developers-net.png', 'teleycare.jpg']);
 const recipe = 'webp-q82-logo-lossless-effort4-auto-orient-v1';
 const portraits = [
   'Benedicta Afrifah Baah.jpeg', 'Bright Vakpor.jpeg', 'Foster D. Kamasa.jpeg',
@@ -32,6 +34,7 @@ for (const filename of portraits) {
   if (!sources.has(filename)) sources.set(filename, path.join(root, 'images', filename));
 }
 sources.set('SMART-HUB-LOGO-ORIGINAL.png', path.join(root, 'public/SMART-HUB-LOGO-ORIGINAL.png'));
+for (const filename of partnerLogos) sources.set(filename, path.join(root, 'public/logos', filename));
 
 let generated = 0;
 let reused = 0;
@@ -40,12 +43,13 @@ let nextIndex = 0;
 
 async function processImage(filename, sourcePath) {
   const source = await readFile(sourcePath);
-  const fingerprint = createHash('sha256').update(recipe).update(source).digest('hex');
+  const isPartnerLogo = partnerLogos.has(filename);
+  const fingerprint = createHash('sha256').update(isPartnerLogo ? 'partner-webp-lossless-effort4-auto-orient-v1' : recipe).update(source).digest('hex');
   const metadata = await sharp(source).metadata();
   const rotated = [5, 6, 7, 8].includes(metadata.orientation);
   const width = rotated ? metadata.height : metadata.width;
   const height = rotated ? metadata.width : metadata.height;
-  const targets = filename === 'SMART-HUB-LOGO-ORIGINAL.png' ? logoWidths : photoWidths;
+  const targets = isPartnerLogo ? partnerLogoWidths : filename === 'SMART-HUB-LOGO-ORIGINAL.png' ? logoWidths : photoWidths;
   const widths = [...new Set(targets.map(target => Math.min(target, width)))];
 
   for (const variantWidth of widths) {
@@ -59,7 +63,7 @@ async function processImage(filename, sourcePath) {
     }
     // Resize and encode only; preserve the full frame, colour and orientation.
     await sharp(source).rotate().resize({ width: variantWidth, withoutEnlargement: true })
-      .webp({ quality: 82, effort: 4, lossless: filename === 'SMART-HUB-LOGO-ORIGINAL.png' }).toFile(destination);
+      .webp({ quality: 82, effort: 4, lossless: isPartnerLogo || filename === 'SMART-HUB-LOGO-ORIGINAL.png' }).toFile(destination);
     generated++;
   }
   cache[filename] = { fingerprint, width, height, widths };

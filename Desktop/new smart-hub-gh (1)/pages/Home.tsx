@@ -63,7 +63,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {featuredProjects.map((project, i) => (
               <AnimatedSection key={project.id} direction="up" delay={i * 0.1} className="group flex flex-col h-full bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 dark:border-white/5">
                 <div className="h-[250px] md:h-[350px] overflow-hidden relative">
@@ -74,14 +74,14 @@ const Home: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                <div className="p-8 md:p-10 flex flex-col flex-grow">
-                  <h3 className="text-xl md:text-3xl font-black text-brand-navy dark:text-white mb-4 leading-tight tracking-tight group-hover:text-brand-blue transition-colors">
+                <div className="p-6 md:p-7 flex flex-col flex-grow">
+                  <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white mb-3 leading-tight tracking-tight group-hover:text-brand-blue transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-slate-400 dark:text-slate-500 text-sm md:text-lg font-medium mb-8 line-clamp-3 flex-grow leading-relaxed">
+                  <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base font-medium mb-5 line-clamp-3 flex-grow leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex justify-between items-center mt-auto pt-6 border-t border-slate-50 dark:border-white/5">
+                  <div className="flex flex-wrap justify-between items-center gap-3 mt-auto pt-4 border-t border-slate-100 dark:border-white/5">
                     <Link to={`/projects/${project.id}`} className="text-brand-blue font-black text-xs md:text-sm uppercase tracking-widest hover:text-brand-navy dark:hover:text-white transition-colors flex items-center gap-2">
                       Read Case Study <ArrowRight size={16} />
                     </Link>
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {recentPosts.map((post, index) => (
               <AnimatedSection key={post.id} direction="up" delay={index * 0.1} className="group h-full bg-slate-50 dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500">
                 <article className="flex flex-col h-full">
@@ -119,16 +119,16 @@ const Home: React.FC = () => {
                       {post.category}
                     </span>
                   </Link>
-                  <div className="p-8 flex flex-col flex-grow">
+                  <div className="p-6 md:p-7 flex flex-col flex-grow">
                     {(post.updatedAt || post.date) && (
                       <p className="flex items-center gap-2 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">
                         <Calendar size={14} aria-hidden="true" className="text-brand-green" /> {post.updatedAt ? `Updated ${post.updatedAt}` : post.date}
                       </p>
                     )}
-                    <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white mb-4 tracking-tight leading-tight hover:text-brand-blue transition-colors">
+                    <h3 className="text-xl font-black text-brand-navy dark:text-white mb-3 tracking-tight leading-tight hover:text-brand-blue transition-colors">
                       <Link to={`/blog/${post.id}`}>{post.title}</Link>
                     </h3>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base font-medium mb-8 line-clamp-3 leading-relaxed">
+                    <p className="text-slate-500 dark:text-slate-400 text-sm md:text-base font-medium mb-5 line-clamp-3 leading-relaxed">
                       {post.excerpt}
                     </p>
                     <Link to={`/blog/${post.id}`} className="inline-flex items-center gap-2 text-brand-blue font-black uppercase tracking-widest hover:text-brand-navy dark:hover:text-white text-[11px] mt-auto">
@@ -170,14 +170,14 @@ const Home: React.FC = () => {
                   key={i}
                   direction="right"
                   delay={i * 0.1}
-                  className={`p-8 md:p-10 rounded-[3rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-xl transition-all duration-500 ${i === 2 ? 'md:col-span-2' : ''}`}
+                  className={`p-6 md:p-7 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-lg transition-all duration-300 ${i === 2 ? 'md:col-span-2' : ''}`}
                 >
                   <div className="flex flex-col h-full">
-                    <Quote className="text-brand-blue mb-6" size={32} fill="currentColor" />
-                    <p className="text-brand-navy dark:text-white font-black text-xl md:text-2xl tracking-tight leading-tight mb-10 flex-grow">
+                    <Quote className="text-brand-blue mb-4" size={24} fill="currentColor" />
+                    <p className="text-brand-navy dark:text-white font-bold text-lg md:text-xl tracking-tight leading-relaxed mb-6 flex-grow">
                       "{testimonial.quote}"
                     </p>
-                    <div className="flex items-center gap-4 pt-6 border-t border-slate-200/50 dark:border-white/5">
+                    <div className="flex items-center gap-4 pt-4 border-t border-slate-200/50 dark:border-white/5">
                       <div>
                         <h4 className="font-black text-brand-navy dark:text-white uppercase text-xs tracking-widest">{testimonial.author}</h4>
                         <p className="text-slate-400 dark:text-slate-500 text-[10px] font-black uppercase tracking-widest mt-0.5">{testimonial.role}</p>
@@ -215,15 +215,15 @@ const FAQItem: React.FC<{ question: string, answer: string, index: number }> = (
   const [isOpen, setIsOpen] = useState(false);
   return (
     <AnimatedSection direction="right" delay={index * 0.1} className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 hover:shadow-lg transition-all duration-300">
-      <button onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`} className="w-full flex items-center justify-between p-6 md:p-8 text-left group">
-        <span className="text-base md:text-xl font-black text-brand-navy dark:text-white group-hover:text-brand-blue transition-colors leading-tight pr-6 tracking-tight">{question}</span>
+      <button onClick={() => setIsOpen(!isOpen)} aria-expanded={isOpen} aria-controls={`faq-answer-${index}`} className="w-full flex items-center justify-between p-5 md:p-6 text-left group">
+        <span className="text-base md:text-lg font-black text-brand-navy dark:text-white group-hover:text-brand-blue transition-colors leading-tight pr-4 tracking-tight">{question}</span>
         <span className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-xl bg-slate-50 dark:bg-white/10 text-brand-blue shadow-sm transition-all duration-500 flex items-center justify-center ${isOpen ? 'rotate-180 bg-brand-blue text-white' : ''}`}>
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
         </span>
       </button>
       <div id={`faq-answer-${index}`} aria-hidden={!isOpen} className={`faq-panel ${isOpen ? 'faq-panel-open' : ''}`}>
         <div className="min-h-0 overflow-hidden">
-        <div className="px-6 md:px-8 pb-6 md:pb-8 text-slate-500 dark:text-slate-400 font-medium text-sm md:text-lg leading-relaxed border-t border-slate-100/30 dark:border-white/5 pt-6">
+        <div className="px-5 md:px-6 pb-5 md:pb-6 text-slate-500 dark:text-slate-400 font-medium text-sm md:text-base leading-relaxed border-t border-slate-100/30 dark:border-white/5 pt-4">
           {answer}
         </div>
         </div>

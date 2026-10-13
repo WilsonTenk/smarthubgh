@@ -317,13 +317,14 @@ export const blogData: BlogPost[] = [
 ];
 
 export const partnersData: Partner[] = [
-  { name: "Plan International Ghana", logo: getAssetPath("/logos/partner-0.svg") },
-  { name: "KGL Foundation", logo: getAssetPath("/logos/partner-1.svg") },
+  { name: "Plan International Ghana", logo: getAssetPath("/logos/plan-international.jpg") },
+  { name: "KGL Foundation", logo: getAssetPath("/logos/kgl-foundation.png") },
   { name: "Government Agencies", logo: getAssetPath("/logos/partner-2.svg") },
   { name: "Religious Bodies", logo: getAssetPath("/logos/partner-3.svg") },
-  { name: "Developer's Net", logo: getAssetPath("/logos/partner-4.svg") },
+  { name: "Developers Net", logo: getAssetPath("/logos/developers-net.png") },
   { name: "Brave Movement Ghana", logo: getAssetPath("/logos/partner-5.svg") },
-  { name: "AfriYAN GHANA", logo: getAssetPath("/logos/partner-6.svg") }
+  { name: "AfriYAN GHANA", logo: getAssetPath("/logos/partner-6.svg") },
+  { name: "TeleYcare", logo: getAssetPath("/logos/teleycare.jpg"), logoScale: 2.3, logoOffsetY: '9%' }
 ];
 
 export const leadershipData: LeadershipMember[] = [

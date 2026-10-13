@@ -8,10 +8,8 @@ import { leadershipData, partnersData } from '../data';
 import { Users, Globe, Layers, CheckCircle2, X } from 'lucide-react';
 import { LeadershipMember } from '../types';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
-
-const Counter: React.FC<{ value: number, suffix?: string }> = ({ value, suffix = "" }) => (
-  <span className="tabular-nums">{value}{suffix}</span>
-);
+import CountUp from '../components/CountUp';
+import PartnerMarquee from '../components/PartnerMarquee';
 
 const About: React.FC = () => {
   const [selectedLeader, setSelectedLeader] = useState<LeadershipMember | null>(null);
@@ -59,14 +57,14 @@ const About: React.FC = () => {
       {/* Vision & Mission */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          <AnimatedSection direction="right" className="bg-slate-50 dark:bg-slate-900/50 p-8 md:p-10 rounded-3xl border border-slate-100 dark:border-white/5 transition-colors">
+          <AnimatedSection direction="right" className="bg-slate-50 dark:bg-slate-900/50 p-6 md:p-8 rounded-2xl border border-slate-100 dark:border-white/5 transition-colors">
             <h2 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white uppercase mb-4 tracking-tight">Our Vision</h2>
             <p className="text-base md:text-lg font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
               A future of competent, healthy and like-minded people making Ghana a premier nation.
             </p>
           </AnimatedSection>
 
-          <AnimatedSection direction="right" delay={0.1} className="bg-brand-blue p-8 md:p-10 rounded-3xl text-white shadow-xl">
+          <AnimatedSection direction="right" delay={0.1} className="bg-brand-blue p-6 md:p-8 rounded-2xl text-white shadow-sm">
             <h2 className="text-xl md:text-2xl font-black uppercase mb-4 tracking-tight">Our Mission</h2>
             <p className="text-base md:text-lg font-medium leading-relaxed text-white/90">
               To impact the Ghanaian society through education, capacity building and advocacy in child protection, adolescents and reproductive health.
@@ -76,29 +74,29 @@ const About: React.FC = () => {
       </div>
 
       {/* NEW: Impact Statistics Section */}
-      <section className="py-20 bg-brand-navy text-white overflow-hidden relative">
+      <section className="py-14 md:py-16 bg-brand-navy text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(0,85,255,0.1),transparent)] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <AnimatedSection direction="up" className="text-center mb-16">
+          <AnimatedSection direction="up" className="text-center mb-10">
             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">Our <span className="text-brand-green">Footprint</span></h2>
             <p className="text-slate-400 font-medium text-lg">Measurable change across the region since 2016.</p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 md:gap-6">
             {[
               { label: "Lives Impacted", value: 5000, suffix: "+", icon: <Users className="text-brand-blue" /> },
               { label: "Projects Completed", value: 12, suffix: "", icon: <Layers className="text-brand-green" /> },
               { label: "Communities Reached", value: 30, suffix: "+", icon: <Globe className="text-brand-blue" /> },
               { label: "Active Volunteers", value: 35, suffix: "+", icon: <CheckCircle2 className="text-brand-green" /> }
             ].map((stat, i) => (
-              <AnimatedSection key={i} direction="up" delay={i * 0.1} className="bg-white/5 backdrop-blur-sm p-8 rounded-[2.5rem] border border-white/10 text-center flex flex-col items-center">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+              <AnimatedSection key={i} direction="up" delay={i * 0.1} className="bg-white/5 p-4 sm:p-6 rounded-2xl border border-white/10 text-center flex flex-col items-center">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-4">
                   {stat.icon}
                 </div>
-                <div className="text-4xl md:text-6xl font-black tracking-tighter mb-2 leading-none">
-                  <Counter value={stat.value} suffix={stat.suffix} />
+                <div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-2 leading-none">
+                  <CountUp value={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-400">{stat.label}</p>
+                <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.12em] text-slate-400">{stat.label}</p>
               </AnimatedSection>
             ))}
           </div>
@@ -106,28 +104,17 @@ const About: React.FC = () => {
       </section>
 
       {/* NEW: Partners Section */}
-      <section className="py-20 bg-white dark:bg-slate-900 overflow-hidden border-y border-slate-100 dark:border-white/5 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <section id="partners" aria-labelledby="partners-heading" className="py-14 md:py-16 bg-white dark:bg-slate-900 overflow-hidden border-y border-slate-100 dark:border-white/5 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
           <AnimatedSection direction="right">
-            <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-brand-navy dark:text-white">
+            <h2 id="partners-heading" className="text-2xl md:text-4xl font-black uppercase tracking-tighter text-brand-navy dark:text-white">
               Trusted by <span className="text-brand-blue">Global</span> Partners
             </h2>
           </AnimatedSection>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 py-4">
-            {partnersData.map((partner) => (
-              <div key={partner.name} className="flex items-center gap-4">
-                <div className="w-12 h-12 md:w-16 md:h-16 shrink-0 bg-slate-100 dark:bg-white/5 rounded-2xl flex items-center justify-center p-2 overflow-hidden">
-                  <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
-                </div>
-                <span className="text-sm md:text-lg font-black uppercase tracking-widest text-slate-600 dark:text-slate-300">
-                  {partner.name}
-                </span>
-              </div>
-            ))}
-          </div>
+          <PartnerMarquee partners={partnersData} />
         </div>
       </section>
 
@@ -136,9 +123,9 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             <AnimatedSection direction="right">
-              <div className="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-white/5 transition-colors">
-                <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white mb-8 uppercase tracking-tight">Identity & Values</h3>
-                <div className="space-y-6 md:space-y-8">
+              <div className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-white/5 transition-colors">
+                <h3 className="text-xl md:text-2xl font-black text-brand-navy dark:text-white mb-6 uppercase tracking-tight">Identity & Values</h3>
+                <div className="space-y-5 md:space-y-6">
                   {[
                     { label: "Impact Now", desc: "Commitment to immediate and effective action." },
                     { label: "Unity", desc: "Two hands holding, signifying collective strength." },
@@ -190,8 +177,8 @@ const About: React.FC = () => {
             {leadershipData.map((leader, idx) => (
               <AnimatedSection key={idx} direction="up" delay={idx * 0.1} className="text-center">
                 <button type="button" onClick={() => setSelectedLeader(leader)} aria-haspopup="dialog" aria-label={`View ${leader.name}'s profile`} className="w-full text-center rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue">
-                  <div className="relative rounded-2xl overflow-hidden mb-4 aspect-square shadow-sm">
-                    <img {...getResponsiveImageProps(leader.image, '(min-width: 1024px) 280px, 45vw')} alt={leader.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                  <div className="relative rounded-2xl overflow-hidden mb-4 aspect-[3/4] bg-slate-100 dark:bg-slate-900 shadow-sm">
+                    <img {...getResponsiveImageProps(leader.image, '(min-width: 1024px) 280px, 45vw')} alt={leader.name} loading="lazy" decoding="async" className="w-full h-full object-contain object-top" />
                   </div>
                   <h4 className="text-base md:text-lg font-black text-brand-navy dark:text-white uppercase tracking-tight">{leader.name}</h4>
                   <p className="text-brand-blue font-black uppercase text-[9px] md:text-[10px] tracking-[0.2em] mt-1">{leader.role}</p>
@@ -221,7 +208,7 @@ const About: React.FC = () => {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="leader-profile-title"
-                className="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row max-h-[90vh]"
+                className="bg-white dark:bg-slate-900 rounded-2xl w-full max-w-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row max-h-[90svh] md:h-[min(560px,90svh)]"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button 
@@ -232,10 +219,10 @@ const About: React.FC = () => {
                 >
                   <X size={20} />
                 </button>
-                <div className="w-full md:w-2/5 aspect-square md:aspect-auto md:h-auto shrink-0 relative">
-                  <img {...getResponsiveImageProps(selectedLeader.image, '(min-width: 768px) 450px, 90vw')} alt={selectedLeader.name} decoding="async" className="w-full h-full object-cover" />
+                <div className="w-full md:w-2/5 h-[min(32svh,288px)] md:h-auto shrink-0 relative bg-slate-100 dark:bg-slate-950">
+                  <img {...getResponsiveImageProps(selectedLeader.image, '(min-width: 768px) 308px, 90vw')} alt={selectedLeader.name} decoding="async" className="w-full h-full md:absolute md:inset-0 object-contain object-top" />
                 </div>
-                <div className="p-6 md:p-8 flex-1 overflow-y-auto">
+                <div className="p-6 md:p-8 flex-1 min-h-0 overflow-y-auto">
                   <h3 id="leader-profile-title" className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tight mb-2">{selectedLeader.name}</h3>
                   <div className="mb-6 flex flex-col gap-1">
                     <span className="text-brand-blue font-black uppercase text-xs tracking-[0.2em]">{selectedLeader.role}</span>

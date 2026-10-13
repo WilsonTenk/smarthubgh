@@ -47,7 +47,7 @@ const ProjectDetail: React.FC = () => {
 
           {/* Sidebar / Metadata */}
           <div className="lg:col-span-1">
-            <AnimatedSection direction="up" className="bg-brand-light dark:bg-slate-900/50 p-8 rounded-2xl sticky top-24 border border-slate-100 dark:border-white/5 transition-colors">
+            <AnimatedSection direction="up" className="bg-brand-light dark:bg-slate-900/50 p-6 md:p-7 rounded-2xl sticky top-24 border border-slate-100 dark:border-white/5 transition-colors">
               <h3 className="font-display text-2xl uppercase mb-6 text-brand-navy dark:text-white border-b border-gray-200 dark:border-white/10 pb-4 tracking-tight">Project Data</h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">

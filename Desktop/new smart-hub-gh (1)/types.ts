@@ -24,7 +24,9 @@ export interface TeamMember {
 
 export interface Partner {
   name: string;
-  logo: string;
+  logo?: string;
+  logoScale?: number;
+  logoOffsetY?: string;
 }
 
 export interface LeadershipMember {

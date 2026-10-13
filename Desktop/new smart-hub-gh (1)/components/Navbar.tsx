@@ -2,8 +2,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Heart, Sun, Moon, ArrowUpRight } from 'lucide-react';
-import { getAssetPath } from '../utils/assetPath';
-import { getResponsiveImageProps } from '../utils/responsiveImage';
+import BrandLogo from './BrandLogo';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,8 +67,9 @@ const Navbar: React.FC = () => {
       <div className={`${isHome ? 'max-w-[1168px] px-5 md:px-6' : 'max-w-7xl px-4 sm:px-6 lg:px-8'} mx-auto`}>
         <div className="flex justify-between items-center">
 
-          <Link to="/" className="flex items-center gap-3 group relative z-[110]">
-            <img {...getResponsiveImageProps(getAssetPath("/SMART-HUB-LOGO-ORIGINAL.png"), isHome ? '56px' : '64px')} alt="Smart Hub Logo" decoding="async" className={`${isHome ? 'h-12 md:h-14' : 'h-16'} w-auto object-contain`} />
+          <Link to="/" aria-label="SMARTHUB home" className="flex shrink-0 items-center gap-2.5 sm:gap-3 group relative z-[110]">
+            <BrandLogo />
+            <span className="text-xl sm:text-2xl font-black tracking-[0.03em] text-brand-navy dark:text-white">SMARTHUB</span>
           </Link>
 
           <div className={`hidden lg:flex items-center ${isHome ? 'gap-6' : 'gap-8'}`}>
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:hidden flex items-center gap-4 relative z-[110]">
+          <div className="lg:hidden flex items-center gap-1 sm:gap-3 relative z-[110]">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-xl text-brand-navy dark:text-white"

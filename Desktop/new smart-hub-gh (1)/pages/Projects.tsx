@@ -24,7 +24,7 @@ const Projects: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {sortProjectsNewestFirst(projectsData).map((project, index) => (
             <AnimatedSection key={project.id} direction="up" delay={index * 0.1} className="h-full">
               <div className="group bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-white/5 flex flex-col h-full">
@@ -37,11 +37,11 @@ const Projects: React.FC = () => {
                    </div>
                 </div>
 
-                <div className="p-8 md:p-10 flex flex-col flex-grow">
+                <div className="p-6 md:p-7 flex flex-col flex-grow">
                    <h3 className="font-black text-xl md:text-2xl text-brand-navy dark:text-white mb-4 leading-tight uppercase tracking-tight line-clamp-2">
                      {project.title}
                    </h3>
-                   <div className="flex flex-wrap gap-3 mb-6">
+                   <div className="flex flex-wrap gap-3 mb-4">
                      <div className="flex items-center gap-2 text-[9px] md:text-[10px] font-black text-gray-500 dark:text-slate-400 uppercase tracking-widest bg-gray-50 dark:bg-white/5 px-3 py-1.5 rounded-full transition-colors">
                        <Calendar size={12} className="text-brand-green" />
                        <span>{project.period}</span>
@@ -51,7 +51,7 @@ const Projects: React.FC = () => {
                        <span>{project.reach}</span>
                      </div>
                    </div>
-                   <p className="text-gray-500 dark:text-slate-400 text-sm md:text-lg leading-relaxed font-medium mb-8 line-clamp-3 flex-grow transition-colors">
+                   <p className="text-gray-500 dark:text-slate-400 text-sm md:text-base leading-relaxed font-medium mb-5 line-clamp-3 flex-grow transition-colors">
                      {project.description}
                    </p>
                    <Link 

@@ -2,8 +2,7 @@
 import React from 'react';
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { getAssetPath } from '../utils/assetPath';
-import { getResponsiveImageProps } from '../utils/responsiveImage';
+import BrandLogo from './BrandLogo';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -16,33 +15,33 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="w-full bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
 
           {/* Big Brand & CTA Section */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-4 mb-8">
-                <img {...getResponsiveImageProps(getAssetPath('/SMART-HUB-LOGO-ORIGINAL.png'), '80px')} alt="Smart Hub Logo" className="h-20 w-auto object-contain" loading="lazy" decoding="async" />
-                <h2 className="text-4xl md:text-6xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
+              <div className="flex items-center gap-3 sm:gap-4 mb-5">
+                <BrandLogo className="h-14 w-14 sm:h-16 sm:w-16" loading="lazy" sizes="(min-width: 640px) 96px, 84px" />
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-brand-navy dark:text-white tracking-tighter uppercase leading-none">
                   Impact <br />
                   <span className="text-brand-blue">Starts Now.</span>
                 </h2>
               </div>
-              <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl font-medium max-w-md mb-10 leading-relaxed transition-colors">
+              <p className="text-slate-500 dark:text-slate-400 text-base md:text-lg font-medium max-w-md mb-6 leading-relaxed transition-colors">
                 Empowering the next generation of Ghanaian leaders through digital innovation and health advocacy.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 px-6 py-4 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl hover:bg-brand-blue hover:border-brand-blue dark:hover:bg-brand-blue transition-all duration-300"
+                  className="group flex items-center gap-2 px-4 py-3 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-brand-blue hover:border-brand-blue dark:hover:bg-brand-blue transition-all duration-300"
                 >
                   <span className="text-brand-navy dark:text-white group-hover:text-white transition-colors">{social.icon}</span>
                   <span className="text-[10px] font-black uppercase tracking-widest text-brand-navy dark:text-white group-hover:text-white transition-colors">{social.name}</span>
@@ -65,7 +64,7 @@ const Footer: React.FC = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="text-2xl md:text-3xl font-black text-brand-navy dark:text-white uppercase tracking-tighter hover:text-brand-blue dark:hover:text-brand-blue transition-all inline-flex items-center gap-2 group"
+                    className="text-xl md:text-2xl font-black text-brand-navy dark:text-white uppercase tracking-tighter hover:text-brand-blue dark:hover:text-brand-blue transition-all inline-flex items-center gap-2 group"
                   >
                     {link.name}
                     <ArrowUpRight size={24} className="opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" />
@@ -116,15 +115,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Credits */}
-        <div className="mt-20 pt-10 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
-            <div className="flex gap-1 h-3">
+        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col xl:flex-row justify-between items-center gap-5">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex gap-1 h-3 shrink-0" aria-hidden="true">
               <div className="w-4 bg-red-600"></div>
               <div className="w-4 bg-yellow-400"></div>
               <div className="w-4 bg-green-600"></div>
             </div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
-              Smart Youth Connkt LBG • Based in Ghana
+            <p className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 leading-relaxed">
+              SMART HUB GH (SMART YOUTH CONNEKT LBG)
             </p>
           </div>
 

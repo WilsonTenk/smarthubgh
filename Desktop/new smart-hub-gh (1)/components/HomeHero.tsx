@@ -5,6 +5,7 @@ import { projectsData } from '../data';
 import { getAssetPath } from '../utils/assetPath';
 import { getResponsiveImageProps } from '../utils/responsiveImage';
 import RotatingFocusWord from './RotatingFocusWord';
+import CountUp from './CountUp';
 import './HomeHero.css';
 
 const photos = [
@@ -16,7 +17,6 @@ const photos = [
 export const HomeHero: React.FC = () => (
   <section id="home-hero" className="home-hero" aria-labelledby="home-heading">
     <div className="home-intro">
-      <p className="home-eyebrow">Young people. Shared possibilities.</p>
       <h1 id="home-heading" className="home-heading" aria-label="Empowering Youth Through Health, Advocacy and Education">
         <span>Empowering Youth</span>{' '}
         <span>Through <span className="home-highlight"><RotatingFocusWord /></span></span>
@@ -72,9 +72,9 @@ export const HomeStory: React.FC = () => (
           alt="SMART Hub team and community participants gathered for a group photo outside a school."
           loading="lazy" decoding="async" />
         <dl className="home-story-stats">
-          <div><dt>Lives impacted</dt><dd>5,000+</dd></div>
-          <div><dt>Projects & initiatives</dt><dd>{projectsData.length}</dd></div>
-          <div><dt>Reached by Reach for Her</dt><dd>395</dd></div>
+          <div><dt>Lives impacted</dt><dd><CountUp value={5000} suffix="+" /></dd></div>
+          <div><dt>Projects & initiatives</dt><dd><CountUp value={projectsData.length} /></dd></div>
+          <div><dt>Reached by Reach for Her</dt><dd><CountUp value={395} /></dd></div>
         </dl>
       </div>
     </div>

@@ -20,20 +20,20 @@ const Contact: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
           
           <div className="order-2 lg:order-1">
-             <AnimatedSection direction="right" className="bg-brand-blue rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+             <AnimatedSection direction="right" className="bg-brand-blue rounded-2xl p-6 md:p-8 text-white relative overflow-hidden shadow-sm">
                 <div className="relative z-10">
-                   <div className="flex items-center gap-4 mb-8">
+                   <div className="flex items-center gap-4 mb-6">
                      <Heart className="text-brand-green" size={28} fill="currentColor" />
                      <h2 className="font-black text-2xl md:text-3xl uppercase tracking-tight leading-none">
                        Bank Transfer
                      </h2>
                    </div>
                    
-                   <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/10 mb-8">
-                      <div className="space-y-6 font-mono text-sm md:text-base">
+                   <div className="bg-white/10 rounded-xl p-5 md:p-6 border border-white/10 mb-6">
+                      <div className="space-y-4 font-mono text-sm md:text-base">
                          <div className="flex flex-col border-b border-white/5 pb-4">
                            <span className="text-white/40 uppercase text-[9px] tracking-[0.2em] mb-1 font-black">Bank Name</span>
                            <span className="font-black text-base md:text-lg">Fidelity Bank, Ho Branch</span>
@@ -63,11 +63,11 @@ const Contact: React.FC = () => {
 
           <div className="order-1 lg:order-2">
             <AnimatedSection direction="right" delay={0.2}>
-              <h2 className="font-black text-2xl md:text-4xl text-brand-navy dark:text-white uppercase mb-10 tracking-tighter transition-colors">Get In Touch</h2>
+              <h2 className="font-black text-2xl md:text-4xl text-brand-navy dark:text-white uppercase mb-6 tracking-tighter transition-colors">Get In Touch</h2>
               
-              <div className="grid grid-cols-1 gap-6 md:gap-8">
-                <div className="group flex items-start gap-5 p-6 md:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+              <div className="grid grid-cols-1 gap-4 md:gap-5">
+                <div className="group flex items-start gap-4 p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <MapPin size={24} />
                   </div>
                   <div>
@@ -77,8 +77,8 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="group flex items-start gap-5 p-6 md:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                <div className="group flex items-start gap-4 p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <Phone size={24} />
                   </div>
                   <div>
@@ -88,13 +88,13 @@ const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="group flex items-start gap-5 p-6 md:p-8 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
-                  <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                <div className="group flex items-start gap-4 p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-white/5 shadow-sm transition-all duration-300">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-light dark:bg-white/5 shadow-inner flex items-center justify-center shrink-0 text-brand-navy dark:text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
                     <Mail size={24} />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="font-black text-sm md:text-base text-brand-navy dark:text-white uppercase tracking-widest mb-1 transition-colors">Email</h3>
-                    <a href="mailto:admin@smarthubgh.com" className="text-gray-500 dark:text-slate-400 text-sm md:text-lg hover:text-brand-blue transition-colors font-medium border-b border-transparent hover:border-brand-blue transition-all">
+                    <a href="mailto:admin@smarthubgh.com" className="text-gray-500 dark:text-slate-400 text-sm md:text-lg break-words hover:text-brand-blue transition-colors font-medium border-b border-transparent hover:border-brand-blue">
                       admin@smarthubgh.com
                     </a>
                   </div>
